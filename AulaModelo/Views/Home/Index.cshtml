@@ -1,0 +1,53 @@
+﻿@model IEnumerable<AulaModelo.Modelo.DB.Model.Produto>
+
+@{
+    ViewBag.Title = "Produtos";
+}
+
+<h2>Index</h2>
+
+@*<p>
+    @Html.ActionLink("NOVO PRODUTO", "inserirProduto")
+    SERÁ DESBLOQUEADO ESSE CÓDIGO QUANDO O ADMIN ESTIVER LOGADO
+</p>*@
+<div class="row">
+    @foreach (var item in Model)
+
+    {
+    <div class="col-sm-4">
+        <img class="card-img-top" width="180px" src="@Html.DisplayFor(modelItem => item.Imagem)">
+        <div class="card-body">
+            <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Nome)</h5>
+            <p class="card-text">R$ @Html.DisplayFor(modelItem => item.Preco)</p>
+            <a href="#" class="btn btn-primary">CONFIRA</a>
+        </div>
+    </div>
+    }
+</div>
+    @*@foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fabricante)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Preco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estoque)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }*@
+
+
