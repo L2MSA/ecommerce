@@ -1,4 +1,6 @@
-﻿using AulaModelo.Modelo.Utils;
+﻿using AulaModelo.Modelo.DB;
+using AulaModelo.Modelo.DB.Model;
+using AulaModelo.Modelo.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +33,11 @@ namespace AulaModelo.Controllers
                 return RedirectToAction("EntrarUsuario");
             }
 
+        }
+        public ActionResult GravarUsuario(Usuario usuario)
+        {
+            DbFactory.Instance.UsuarioRepository.SaveOrUpdate(usuario);
+            return RedirectToAction("Index", "Home");
         }
     }
 }

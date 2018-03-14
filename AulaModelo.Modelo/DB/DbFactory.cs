@@ -24,12 +24,14 @@ namespace AulaModelo.Modelo.DB
         private ISessionFactory _sessionFactoty;
 
         public ProdutoRepository ProdutoRepository { get; set; }
+        public UsuarioRepository UsuarioRepository { get; set; }
 
         private DbFactory()
         {
             Conexao();
 
             ProdutoRepository = new ProdutoRepository(Session);
+            UsuarioRepository = new UsuarioRepository(Session);
         }
 
         public static DbFactory Instance
