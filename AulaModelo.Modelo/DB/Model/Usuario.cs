@@ -15,7 +15,8 @@ namespace AulaModelo.Modelo.DB.Model
         public virtual String Login { get; set; }
         public virtual String Senha { get; set; }
         public virtual String Telefone { get; set; }
-        
+        public virtual String Tipo { get; set; }
+
     }
     public class UsuarioMap : ClassMapping<Usuario>
     {
@@ -26,6 +27,7 @@ namespace AulaModelo.Modelo.DB.Model
             Property(x => x.Login);
             Property(x => x.Senha);
             Property(x => x.Telefone);
+            Property(x => x.Tipo);
 
         }
     }

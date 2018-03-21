@@ -20,9 +20,9 @@ namespace AulaModelo.Controllers
         {
             return View();
         }
-        public ActionResult Logar(string usuario, string senha)
+        public ActionResult Logar(string email, string senha)
         {
-            LoginUtils.Logar(usuario, senha);
+            LoginUtils.Logar(email, senha);
 
             if (LoginUtils.Usuario != null)
             {
@@ -30,9 +30,14 @@ namespace AulaModelo.Controllers
             }
             else
             {
-                return RedirectToAction("EntrarUsuario");
+                return RedirectToAction("Index");
             }
 
+        }
+        public ActionResult Deslogar()
+        {
+            LoginUtils.Deslogar();
+            return RedirectToAction("Index", "Home");
         }
         public ActionResult GravarUsuario(Usuario usuario)
         {

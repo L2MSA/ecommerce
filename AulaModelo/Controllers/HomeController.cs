@@ -39,7 +39,10 @@ namespace AulaModelo.Controllers
             
             return RedirectToAction("Index");
         }
-
+        public ActionResult DetalharProduto(Guid id)
+        {
+            return View();
+        }
         public ActionResult Buscar(String edtBusca)
         {
 

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<AulaModelo.Modelo.DB.Model.Produto>
+
+<div class="row">
+    @foreach (var item in Model)
+
+    {
+        <div class="col-sm-4">
+            <img class="card-img-top" width="180px" src="@Html.DisplayFor(modelItem => item.Imagem)">
+            <div class="card-body">
+                <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Nome)</h5>
+                <p class="card-text"><b><font color="#00bfff">R$ @Html.DisplayFor(modelItem => item.Preco)</font></b></p>
+                <a href="../Produto/confiraProduto/@item.Id" class="btn btn-danger">CONFIRA</a>
+            </div>
+        </div>
+    }
+</div>

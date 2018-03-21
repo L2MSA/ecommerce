@@ -1,0 +1,45 @@
+﻿@model AulaModelo.Modelo.DB.Model.Produto
+@using AulaModelo.Controllers
+
+
+@{
+    ViewBag.Title = "" + Model.Nome;
+}
+
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <p><h3>@Model.Nome</h3></p><br />
+        <p><h5>@Model.Descricao</h5></p>
+    </div>
+    <div class="col-sm-4">
+        <img src="@Model.Imagem" width="520px" />
+    </div>
+    <div class="col-sm-4">
+        @using (Html.BeginForm("comprarProduto", "Produto", FormMethod.Post))
+        {
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-02">
+                    <h1><b><font color="#00bfff">R$@Model.Preco</font></b></h1>
+                    <font color="#00bfff">No boleto @AulaModelo.Controllers.ProdutoController.descontoAvista(Model.Preco)</font> <br /><br /><br />
+                    <input type="submit" value="COMPRAR" class="btn btn-danger" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+<h3>APROVEITE E COMPRE JUNTO</h3>
+<div class="row">
+    @foreach (var item in AulaModelo.Modelo.DB.DbFactory.Instance.ProdutoRepository.FindAll())
+    {
+        <div class="col-sm-4">
+
+            <img src="@item.Imagem" width="260px" />
+            <p>@item.Nome</p>
+            <a href="../confiraProduto/@item.Id" class="btn btn-danger">CONFIRA</a>
+        </div>
+    }

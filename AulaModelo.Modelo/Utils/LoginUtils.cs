@@ -1,4 +1,5 @@
-﻿using AulaModelo.Modelo.DB.Model;
+﻿using AulaModelo.Modelo.DB;
+using AulaModelo.Modelo.DB.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace AulaModelo.Modelo.Utils
 {
     public class LoginUtils
     {
+        public static Boolean condicao = false;
         public static Usuario Usuario
         {
             get
@@ -23,15 +25,20 @@ namespace AulaModelo.Modelo.Utils
         }
 
 
-        public static void Logar(String usuario, string senha)
+        public static void Logar(String login, string senha)
         {
-            if ((usuario == "admin") && (senha == "123456"))
+            var usuario = DbFactory.Instance.UsuarioRepository.Login(login, senha);
+            if (usuario != null)
             {
-               
-                HttpContext.Current.Session["Usuario"] = new Usuario();
+                HttpContext.Current.Session["Usuario"] = usuario;
             }
+            else
+            {
+                condicao = true;
+            }
+
         }
-        public static void Deslogar(String usuario, string senha)
+        public static void Deslogar()
         {
 
             HttpContext.Current.Session["Usuario"] = null;
