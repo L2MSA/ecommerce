@@ -29,12 +29,12 @@ namespace AulaModelo.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult ApagarPessoa(Guid id)
+        public ActionResult ApagarProduto(Guid id)
         {
-            var pessoa = DbFactory.Instance.ProdutoRepository.FindById(id);
-            if(pessoa != null)
+            var p = DbFactory.Instance.ProdutoRepository.FindById(id);
+            if (p != null)
             {
-                DbFactory.Instance.ProdutoRepository.Delete(pessoa);
+                DbFactory.Instance.ProdutoRepository.Delete(p);
             }
             
             return RedirectToAction("Index");
