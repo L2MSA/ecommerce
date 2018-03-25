@@ -41,7 +41,15 @@ namespace AulaModelo.Controllers
         }
         public ActionResult DetalharProduto(Guid id)
         {
-            return View();
+            var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
+            if (produto != null)
+            {
+                return View(produto);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
         public ActionResult Buscar(String edtBusca)
         {

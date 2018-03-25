@@ -8,7 +8,7 @@
 
 @if (LoginUtils.Usuario != null)
 {
-    if (LoginUtils.Usuario.Tipo == "adm")
+    if (LoginUtils.Usuario.AdminSN)
     {
         <br />
         using (Html.BeginForm("Buscar", "Home", FormMethod.Get))
@@ -73,11 +73,11 @@
         @Html.ActionLink("NOVO PRODUTO", "inserirProduto")
     }
 
-    if (LoginUtils.Usuario.Tipo != "adm")
+    if (!LoginUtils.Usuario.AdminSN)
     {
         @Html.Partial("_HomePadrao")
-
     }
+   
 }
 
 @if (LoginUtils.Usuario == null)

@@ -16,7 +16,7 @@ namespace AulaModelo.Modelo.DB.Repository
         {
             try
             {
-                return this.Session.Query<Produto>().Where(w => w.Nome.ToLower() == nome.Trim().ToLower()).ToList();
+                return this.Session.Query<Produto>().Where(w => w.Nome.ToLower().Contains(nome.Trim().ToLower())).ToList();
             }catch(Exception ex)
             {
                 throw new Exception("Não achei os produtos pelo filtro nome", ex);

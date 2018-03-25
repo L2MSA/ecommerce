@@ -23,5 +23,32 @@ namespace AulaModelo.Controllers
         {
             return valor = valor - (valor / 100) * 15;
         }
+
+        public ActionResult GerenciarProduto()
+        {
+            var produtos = DbFactory.Instance.ProdutoRepository.FindAll().ToList();
+
+            return View(produtos);
+        }
+
+        public ActionResult DetalharProduto(Guid id)
+        {
+            var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
+            return View(produto);
+        }
+
+        public ActionResult Buscar(String edtBusca)
+        {
+
+            DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
+
+            if (String.IsNullOrEmpty(edtBusca))
+            {
+                return RedirectToAction("Index");
+            }
+            var pessoas = DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
+
+            return View("Index", pessoas);
+        }
     }
 }
