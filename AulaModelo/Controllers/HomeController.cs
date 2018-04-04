@@ -53,6 +53,18 @@ namespace AulaModelo.Controllers
         }
         public ActionResult Buscar(String edtBusca)
         {
+            Historico h = new Historico();
+            h.Pesquisa = edtBusca;
+            if (Session["Usuario"] != null)
+            {
+                h.IdUsuario = (Guid)Session["UsuarioID"];
+            }
+
+
+            DbFactory.Instance.HistoricoRepository.SalvandoHistorico(h);
+            DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
+
+
 
             DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
             

@@ -31,6 +31,7 @@ namespace AulaModelo.Modelo.Utils
             if (usuario != null)
             {
                 HttpContext.Current.Session["Usuario"] = usuario;
+                HttpContext.Current.Session["UsuarioID"] = usuario.Id;
             }
             else
             {
@@ -38,6 +39,7 @@ namespace AulaModelo.Modelo.Utils
             }
 
         }
+       
         public static void Deslogar()
         {
 

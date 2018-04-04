@@ -1,0 +1,32 @@
+﻿@model IEnumerable<AulaModelo.Modelo.DB.Model.Historico>
+
+@{
+    ViewBag.Title = "historicoBusca";
+}
+
+<h2>Meu Histórico</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Pesquisa)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pesquisa)
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+ <button type="button" class="btn btn-primary">LIMPAR TUDO</button>
+

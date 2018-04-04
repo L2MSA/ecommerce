@@ -44,5 +44,39 @@ namespace AulaModelo.Controllers
             DbFactory.Instance.UsuarioRepository.SaveOrUpdate(usuario);
             return RedirectToAction("Index", "Home");
         }
+        //public ActionResult Buscar(String edtBusca)
+        //{
+           
+            
+        //    Historico h = new Historico();
+        //    h.Pesquisa = edtBusca;
+        //    if (Session["Usuario"] != null)
+        //    {
+        //        h.IdUsuario = (Guid)Session["UsuarioID"];
+        //    }
+
+
+        //    DbFactory.Instance.HistoricoRepository.SalvandoHistorico(h);
+        //    DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
+
+        //    if (String.IsNullOrEmpty(edtBusca))
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+        //    var pessoas = DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
+
+        //    return View("Home/Index", pessoas);
+        //}
+        public ActionResult historicoBusca()
+        {
+            Guid IdUsuario = new Guid();
+            if (Session["Usuario"] != null)
+            {
+                IdUsuario = (Guid)Session["UsuarioID"];
+            }
+
+            var historico = DbFactory.Instance.HistoricoRepository.findAllById(IdUsuario);
+            return View(historico);
+        }
     }
 }

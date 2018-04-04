@@ -137,6 +137,7 @@
     <Content Include="Views\Produto\confiraProduto.cshtml" />
     <Content Include="Views\Produto\GerenciarProduto.cshtml" />
     <Content Include="Views\Produto\DetalharProduto.cshtml" />
+    <Content Include="Views\Usuario\historicoBusca.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

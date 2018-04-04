@@ -73,15 +73,24 @@
         @Html.ActionLink("NOVO PRODUTO", "inserirProduto")
     }
 
+
     if (!LoginUtils.Usuario.AdminSN)
     {
+        using (Html.BeginForm("Buscar", "Home", FormMethod.Get))
+        {
+            @Html.Editor("edtBusca")
+            <button type="submit" valur="Buscar" class="btn btn-primary">
+                <i class="glyphicon glyphicon-search"></i> Buscar
+            </button>
+        }
         @Html.Partial("_HomePadrao")
     }
-   
+
 }
 
 @if (LoginUtils.Usuario == null)
 {
+  
     @Html.Partial("_HomePadrao")
 }
 

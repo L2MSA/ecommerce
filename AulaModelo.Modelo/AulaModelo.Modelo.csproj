@@ -70,8 +70,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DB\DbFactory.cs" />
+    <Compile Include="DB\Model\Historico.cs" />
     <Compile Include="DB\Model\Produto.cs" />
     <Compile Include="DB\Model\Usuario.cs" />
+    <Compile Include="DB\Repository\HistoricoRepository.cs" />
     <Compile Include="DB\Repository\ProdutoRepository.cs" />
     <Compile Include="DB\Repository\RepositoryBase.cs" />
     <Compile Include="DB\Repository\UsuarioRepository.cs" />

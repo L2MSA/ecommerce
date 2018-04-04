@@ -54,14 +54,14 @@
                 else
                 {
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink("Bem vindo " + LoginUtils.Usuario.Nome, "", "Usuario")</li>
-                        @*@if (LoginUtils.Usuario.AdminSN)
-                        {
-                            <li>@Html.ActionLink("Gerenciar Produtos", "GerenciarProduto", "Produto")</li>
-                        }*@                        
-                        <li>@Html.ActionLink("Deslogar ", "Deslogar", "Usuario")</li>
-                    </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Bem vindo " + LoginUtils.Usuario.Nome, "", "")</li>
+                    @*@if (LoginUtils.Usuario.AdminSN)
+        {
+            <li>@Html.ActionLink("Gerenciar Produtos", "GerenciarProduto", "Produto")</li>
+        }*@         <li>@Html.ActionLink("Histórico de Busca ", "historicoBusca", "Usuario")</li>
+                    <li>@Html.ActionLink("Deslogar ", "Deslogar", "Usuario")</li>
+                </ul>
                 }
 
 
