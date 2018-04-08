@@ -1,4 +1,5 @@
 ﻿using AulaModelo.Modelo.DB;
+using AulaModelo.Modelo.DB.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,42 @@ namespace AulaModelo.Controllers
         {
             return View();
         }
-        public ActionResult confiraProduto(Guid id)
+
+        public ActionResult InserirProduto()
+        {
+            return View("EditarProduto", new Produto());
+        }
+
+        public ActionResult EditarProduto(Guid id)
         {
             var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
-            return View(produto);
+            if (produto != null)
+                return View(produto);
+
+            return RedirectToAction("Index");
         }
+
+        public ActionResult GravarProduto(Produto produto)
+        {
+            DbFactory.Instance.ProdutoRepository.SaveOrUpdate(produto);
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult ApagarProduto(Guid id)
+        {
+            var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
+            if (produto != null)
+                DbFactory.Instance.ProdutoRepository.Delete(produto);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult ExibirProduto(Guid id)
+        {
+            var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
+            return View("ExibirProduto", produto);
+        }
+
         public static double descontoAvista(double valor)
         {
             return valor = valor - (valor / 100) * 15;
@@ -29,12 +61,6 @@ namespace AulaModelo.Controllers
             var produtos = DbFactory.Instance.ProdutoRepository.FindAll().ToList();
 
             return View(produtos);
-        }
-
-        public ActionResult DetalharProduto(Guid id)
-        {
-            var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
-            return View(produto);
         }
 
         public ActionResult Buscar(String edtBusca)
@@ -49,6 +75,17 @@ namespace AulaModelo.Controllers
             var pessoas = DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
 
             return View("Index", pessoas);
+        }
+
+        
+
+        public ActionResult DetalharProduto(Guid id)
+        {
+            var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
+            if (produto != null)
+                return View(produto);
+
+            return RedirectToAction("Index");
         }
     }
 }

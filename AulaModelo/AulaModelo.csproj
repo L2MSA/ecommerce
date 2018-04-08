@@ -130,12 +130,12 @@
     <Content Include="Views\View.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\EditarProduto.cshtml" />
+    <Content Include="Views\Produto\EditarProduto.cshtml" />
     <Content Include="Views\Shared\_MenuPadrao.cshtml" />
     <Content Include="Views\Usuario\CadastrarUsuario.cshtml" />
     <Content Include="Views\Home\DetalharProduto.cshtml" />
     <Content Include="Views\Shared\_HomePadrao.cshtml" />
-    <Content Include="Views\Produto\confiraProduto.cshtml" />
+    <Content Include="Views\Produto\ExibirProduto.cshtml" />
     <Content Include="Views\Produto\GerenciarProduto.cshtml" />
     <Content Include="Views\Produto\DetalharProduto.cshtml" />
     <Content Include="Views\Usuario\historicoBusca.cshtml" />

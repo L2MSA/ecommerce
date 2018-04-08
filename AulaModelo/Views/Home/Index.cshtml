@@ -62,15 +62,15 @@
                         @Html.DisplayFor(modelItem => item.Estoque)
                     </td>
                     <td>
-                        @Html.ActionLink("Editar", "EditarProduto", new { id = item.Id }) |
-                        @Html.ActionLink("Detalhar", "DetalharProduto", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "ApagarProduto", new { id = item.Id })
+                        @Html.ActionLink("Editar", "EditarProduto", "Produto", new { id = item.Id }, null) |
+                        @Html.ActionLink("Detalhar", "DetalharProduto", "Produto", new { id = item.Id }, null) |
+                        @Html.ActionLink("Delete", "ApagarProduto", "Produto", new { id = item.Id }, null)
                     </td>
                 </tr>
             }
 
         </table>
-        @Html.ActionLink("NOVO PRODUTO", "inserirProduto")
+        @Html.ActionLink("NOVO PRODUTO", "inserirProduto", "Produto")
     }
 
 

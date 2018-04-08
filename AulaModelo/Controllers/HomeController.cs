@@ -14,43 +14,10 @@ namespace AulaModelo.Controllers
         public ActionResult Index()
         {
             var produtos = DbFactory.Instance.ProdutoRepository.FindAll();
-
             return View(produtos);
         }
 
-        public ActionResult inserirProduto()
-        {
-            return View("EditarProduto", new Produto());
-        }
-
-        public ActionResult GravarProduto(Produto pessoa)
-        {
-            DbFactory.Instance.ProdutoRepository.SaveOrUpdate(pessoa);
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult ApagarProduto(Guid id)
-        {
-            var p = DbFactory.Instance.ProdutoRepository.FindById(id);
-            if (p != null)
-            {
-                DbFactory.Instance.ProdutoRepository.Delete(p);
-            }
-            
-            return RedirectToAction("Index");
-        }
-        public ActionResult DetalharProduto(Guid id)
-        {
-            var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
-            if (produto != null)
-            {
-                return View(produto);
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
-        }
+        
         public ActionResult Buscar(String edtBusca)
         {
             Historico h = new Historico();
@@ -60,37 +27,14 @@ namespace AulaModelo.Controllers
                 h.IdUsuario = (Guid)Session["UsuarioID"];
             }
 
-
             DbFactory.Instance.HistoricoRepository.SalvandoHistorico(h);
-            DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
-
-
-
             DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
             
             if(String.IsNullOrEmpty(edtBusca))
-            {
                 return RedirectToAction("Index");
-            }
-            var pessoas = DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
 
-            return View("Index", pessoas);
+            var produtos = DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
+            return View("Index", produtos);
         }
-
-        public ActionResult EditarProduto(Guid id)
-        {
-            var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
-            if (produto != null)
-            {
-                return View(produto);
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
-
-            
-        }
-
     }
 }
