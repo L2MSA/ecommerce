@@ -81,5 +81,39 @@ namespace AulaModelo.Controllers
             var produtos = DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
             return View("Index", produtos);
         }
+
+        public ActionResult BuscaAvancada()
+        {
+            // Busca por categoria
+            ViewBag.IdCategoria = new SelectList(
+                DbFactory.Instance.CategoriaRepository.FindAll(),
+                "Id",
+                "Nome"
+            );
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult BuscaAvancada(FormCollection form)
+        {
+            String tipoBusca = form["tipoBusca"];
+
+            if (tipoBusca.Contains("BuscaCategoria"))
+            {
+                var catGuid = Guid.Parse(form["IdCategoria"]);
+                var produtos = DbFactory.Instance.ProdutoRepository.GetAllByCategoria(catGuid);
+                return View("Index", produtos);
+            }
+
+            if (tipoBusca.Contains("BuscaPorPreco"))
+            {
+                var preco = Double.Parse(form["precoProduto"]);
+                var produtos = DbFactory.Instance.ProdutoRepository.BuscaProdutoPorPreco(preco);
+                return View("Index", produtos);
+            }
+
+            return View("Index");
+        }
     }
 }

@@ -1,0 +1,63 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "Busca Avancada";
+}
+
+<h2>Busca avançada</h2>
+
+<h3>Busca por categoria</h3>
+
+@using (Html.BeginForm("BuscaAvancada", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.Hidden("tipoBusca", "BuscaCategoria")
+
+        <div class="form-group">
+            @Html.Label("Busca por categoria", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IdCategoria", (IEnumerable<SelectListItem>)ViewBag.IdCategoria, "Selecione uma categoria")
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Buscar" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<h3>Busca por preço</h3>
+
+@using (Html.BeginForm("BuscaAvancada", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.Hidden("tipoBusca", "BuscaPorPreco")
+
+        <div class="form-group">
+            @Html.Label("Busca por preço", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Editor("precoProduto", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Buscar" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar", "Index", "Home")
+</div>

@@ -33,5 +33,17 @@ namespace AulaModelo.Modelo.DB.Repository
                 throw new Exception("Não achei produtos nesta categoria", ex);
             }
         }
+
+        public IList<Produto> BuscaProdutoPorPreco(Double preco)
+        {
+            try
+            {
+                return this.Session.Query<Produto>().Where(w => w.Preco.Equals(preco)).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não achei produtos com esse preco", ex);
+            }
+        }
     }
 }
