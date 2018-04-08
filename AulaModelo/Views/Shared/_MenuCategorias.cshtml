@@ -1,0 +1,22 @@
+﻿@model IEnumerable<AulaModelo.Modelo.DB.Model.Categoria>
+@using AulaModelo.Modelo.Utils
+
+
+@{
+    var categorias = AulaModelo.Modelo.DB.DbFactory.Instance.CategoriaRepository.FindAll();
+}
+
+@foreach (var item in categorias)
+{
+
+    <li><a href="/Categoria/@Html.DisplayFor(modelItem => item.Id)">@Html.DisplayFor(modelItem => item.Nome)</a></li>
+}
+
+@if (LoginUtils.Usuario != null)
+{
+    if (LoginUtils.Usuario.AdminSN == true)
+    {
+        <li class="divider"></li>
+        <li>@Html.ActionLink("Criar nova categoria", "CriarCategoria", "Categoria")</li>
+    }
+}

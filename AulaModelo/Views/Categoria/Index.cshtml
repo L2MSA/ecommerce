@@ -1,0 +1,41 @@
+﻿@using AulaModelo.Modelo.Utils
+@model IEnumerable<AulaModelo.Modelo.DB.Model.Categoria>
+
+@{
+    ViewBag.Title = "Categorias";
+}
+
+<h2>Categorias disponíveis</h2>
+
+@if (LoginUtils.Usuario != null)
+{
+    if (LoginUtils.Usuario.AdminSN == true)
+    {
+        <p>
+            @Html.ActionLink("Criar nova categoria", "CriarCategoria")
+        </p>
+    }
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "EditarCategoria", new { id = item.Id }) |
+                @Html.ActionLink("Apagar", "ApagarCategoria", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

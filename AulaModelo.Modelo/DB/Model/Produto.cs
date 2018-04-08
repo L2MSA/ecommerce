@@ -18,6 +18,7 @@ namespace AulaModelo.Modelo.DB.Model
         public virtual String Imagem { get; set; }
         public virtual String Fabricante { get; set; }
         public virtual Double Preco { get; set; }
+        public virtual Guid IdCategoria { get; set; }
         public virtual int Estoque { get; set; }
     }
 
@@ -33,6 +34,7 @@ namespace AulaModelo.Modelo.DB.Model
             Property(x => x.Fabricante);
             Property(x => x.Preco);
             Property(x => x.Estoque);
+            Property(x => x.IdCategoria);
         }
     }
 }

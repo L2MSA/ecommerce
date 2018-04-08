@@ -23,14 +23,16 @@ namespace AulaModelo.Modelo.DB
 
         private ISessionFactory _sessionFactoty;
 
+        public CategoriaRepository CategoriaRepository { get; set; }
         public ProdutoRepository ProdutoRepository { get; set; }
         public UsuarioRepository UsuarioRepository { get; set; }
         public HistoricoRepository HistoricoRepository { get; set; }
-
+        
         private DbFactory()
         {
             Conexao();
 
+            CategoriaRepository = new CategoriaRepository(Session);
             ProdutoRepository = new ProdutoRepository(Session);
             UsuarioRepository = new UsuarioRepository(Session);
             HistoricoRepository = new HistoricoRepository(Session);
@@ -58,7 +60,7 @@ namespace AulaModelo.Modelo.DB
                 var port = "3306";
                 var dbName = "db_comercio_eletronico";
                 var user = "root";
-                var psw = "root";
+                var psw = "";
 
                 var stringConexao = "Persist Security Info=False;"+
                     "server=" +server+
