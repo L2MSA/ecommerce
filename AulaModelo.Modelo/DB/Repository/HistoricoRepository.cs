@@ -35,7 +35,7 @@ namespace AulaModelo.Modelo.DB.Repository
         {
             try
             {
-                return Session.CreateCriteria(typeof(Historico)).List<Historico>().Where(x => x.IdUsuario == id).ToList();
+                return Session.CreateCriteria(typeof(Historico)).List<Historico>().Where(x => x.Usuario.Id == id).ToList();
             }
             catch (Exception ex)
             {

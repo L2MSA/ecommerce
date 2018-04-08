@@ -24,6 +24,7 @@ namespace AulaModelo.Modelo.DB
         private ISessionFactory _sessionFactoty;
 
         public CategoriaRepository CategoriaRepository { get; set; }
+        public ComentarioRepository ComentarioRepository { get; set; }
         public ProdutoRepository ProdutoRepository { get; set; }
         public UsuarioRepository UsuarioRepository { get; set; }
         public HistoricoRepository HistoricoRepository { get; set; }
@@ -33,6 +34,7 @@ namespace AulaModelo.Modelo.DB
             Conexao();
 
             CategoriaRepository = new CategoriaRepository(Session);
+            ComentarioRepository = new ComentarioRepository(Session);
             ProdutoRepository = new ProdutoRepository(Session);
             UsuarioRepository = new UsuarioRepository(Session);
             HistoricoRepository = new HistoricoRepository(Session);

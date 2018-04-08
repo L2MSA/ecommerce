@@ -76,5 +76,11 @@ namespace AulaModelo.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public ActionResult VerCategoria(Guid id)
+        {
+            var produtos = DbFactory.Instance.ProdutoRepository.GetAllByCategoria(id);
+            return View("ListProdutoCategoriaHome", produtos);
+        }
     }
 }

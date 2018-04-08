@@ -15,7 +15,14 @@ namespace AulaModelo.Modelo.DB.Model
         public virtual String Login { get; set; }
         public virtual String Senha { get; set; }
         public virtual String Telefone { get; set; }
+        public virtual Categoria Interesse { get; set; }
+        public virtual IList<Comentario> Comentarios { get; set; }
         public virtual Boolean AdminSN { get; set; }
+
+        public Usuario()
+        {
+            Comentarios = new List<Comentario>();
+        }
 
     }
     public class UsuarioMap : ClassMapping<Usuario>
@@ -27,8 +34,32 @@ namespace AulaModelo.Modelo.DB.Model
             Property(x => x.Login);
             Property(x => x.Senha);
             Property(x => x.Telefone);
-            Property(x => x.AdminSN);
 
+            ManyToOne(x => x.Interesse, m =>
+            {
+                m.Column("IdInteresse");
+                m.Lazy(LazyRelation.NoLazy);
+            });
+
+            //Bag(x => x.Interesses, m =>
+            //{
+            //    m.Cascade(Cascade.Detach);
+            //    m.Lazy(CollectionLazy.Lazy);
+            //    m.Key(k => k.Column("IdInteresse"));
+            //    m.Inverse(true);
+            //},
+            //r => r.OneToMany());
+
+            Bag(x => x.Comentarios, m =>
+            {
+                m.Cascade(Cascade.Detach);
+                m.Lazy(CollectionLazy.Lazy);
+                m.Key(k => k.Column("IdComentario"));
+                m.Inverse(true);
+            },
+            r => r.OneToMany());
+
+            Property(x => x.AdminSN);
         }
     }
 }

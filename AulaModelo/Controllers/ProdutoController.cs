@@ -18,20 +18,44 @@ namespace AulaModelo.Controllers
 
         public ActionResult InserirProduto()
         {
+            ViewBag.IdCategoria = new SelectList(
+                DbFactory.Instance.CategoriaRepository.FindAll(),
+                "Id",
+                "Nome"
+            );
+
             return View("EditarProduto", new Produto());
         }
 
         public ActionResult EditarProduto(Guid id)
         {
             var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
+
+            ViewBag.IdCategoria = new SelectList(
+                DbFactory.Instance.CategoriaRepository.FindAll(),
+                "Id",
+                "Nome"
+            );
+
             if (produto != null)
                 return View(produto);
 
             return RedirectToAction("Index");
         }
 
-        public ActionResult GravarProduto(Produto produto)
+        [HttpPost]
+        public ActionResult GravarProduto(Produto produto, Guid IdCategoria)
         {
+
+            ViewBag.IdCategoria = new SelectList(
+                DbFactory.Instance.CategoriaRepository.FindAll(),
+                "Id",
+                "Nome",
+                IdCategoria
+            );
+
+            var categoria = DbFactory.Instance.CategoriaRepository.FindById(IdCategoria);
+            produto.Categoria = categoria;
             DbFactory.Instance.ProdutoRepository.SaveOrUpdate(produto);
             return RedirectToAction("Index", "Home");
         }

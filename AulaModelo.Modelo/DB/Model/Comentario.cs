@@ -8,24 +8,35 @@ using System.Threading.Tasks;
 
 namespace AulaModelo.Modelo.DB.Model
 {
-    public class Historico
+    public class Comentario
     {
         public virtual Guid Id { get; set; }
-        public virtual String Pesquisa { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual Produto Produto { get; set; }
+        public virtual String Descricao { get; set; }
+        public virtual String Avaliacao { get; set; }
     }
-    public class HistoricoMap : ClassMapping<Historico>
+
+    public class ComentarioMap : ClassMapping<Comentario>
     {
-        public HistoricoMap()
+        public ComentarioMap()
         {
             Id(x => x.Id, m => m.Generator(Generators.Guid));
-            Property(x => x.Pesquisa);
 
             ManyToOne(x => x.Usuario, m =>
             {
                 m.Column("IdUsuario");
                 m.Lazy(LazyRelation.NoLazy);
             });
+
+            ManyToOne(x => x.Produto, m =>
+            {
+                m.Column("IdProduto");
+                m.Lazy(LazyRelation.NoLazy);
+            });
+
+            Property(x => x.Descricao);
+            Property(x => x.Avaliacao);
         }
     }
 }

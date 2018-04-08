@@ -11,6 +11,7 @@ namespace AulaModelo.Modelo.DB.Model
     public class Produto
     {
         public static List<Produto> Produtos = new List<Produto>();
+        private static Random rnd = new Random();
 
         public virtual Guid Id { get; set; }
         public virtual String Nome { get; set; }
@@ -18,8 +19,14 @@ namespace AulaModelo.Modelo.DB.Model
         public virtual String Imagem { get; set; }
         public virtual String Fabricante { get; set; }
         public virtual Double Preco { get; set; }
-        public virtual Guid IdCategoria { get; set; }
+        public virtual Categoria Categoria { get; set; }
+        public virtual IList<Comentario> Comentarios { get; set; }
         public virtual int Estoque { get; set; }
+
+        public Produto()
+        {
+            Comentarios = new List<Comentario>();
+        }
     }
 
     public class ProdutoMap : ClassMapping<Produto>
@@ -33,8 +40,23 @@ namespace AulaModelo.Modelo.DB.Model
             Property(x => x.Imagem);
             Property(x => x.Fabricante);
             Property(x => x.Preco);
+
+            ManyToOne(x => x.Categoria, m =>
+            {
+                m.Column("IdCategoria");
+                m.Lazy(LazyRelation.NoLazy);
+            });
+
+            Bag(x => x.Comentarios, m =>
+            {
+                m.Cascade(Cascade.Detach);
+                m.Lazy(CollectionLazy.Lazy);
+                m.Key(k => k.Column("IdComentario"));
+                m.Inverse(true);
+            },
+            r => r.OneToMany());
+
             Property(x => x.Estoque);
-            Property(x => x.IdCategoria);
         }
     }
 }

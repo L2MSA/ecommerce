@@ -14,6 +14,12 @@ namespace AulaModelo.Controllers
         // GET: Usuario
         public ActionResult CadastrarUsuario()
         {
+            ViewBag.IdCategoria = new SelectList(
+                DbFactory.Instance.CategoriaRepository.FindAll(),
+                "Id",
+                "Nome"
+            );
+
             return View();
         }
         public ActionResult EntrarUsuario()
@@ -39,8 +45,19 @@ namespace AulaModelo.Controllers
             LoginUtils.Deslogar();
             return RedirectToAction("Index", "Home");
         }
-        public ActionResult GravarUsuario(Usuario usuario)
+
+        [HttpPost]
+        public ActionResult GravarUsuario(Usuario usuario, Guid IdCategoria)
         {
+            ViewBag.IdCategoria = new SelectList(
+                DbFactory.Instance.CategoriaRepository.FindAll(),
+                "Id",
+                "Nome",
+                IdCategoria
+            );
+
+            var interesse = DbFactory.Instance.CategoriaRepository.FindById(IdCategoria);
+            usuario.Interesse = interesse;
             DbFactory.Instance.UsuarioRepository.SaveOrUpdate(usuario);
             return RedirectToAction("Index", "Home");
         }

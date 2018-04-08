@@ -9,7 +9,7 @@
 @foreach (var item in categorias)
 {
 
-    <li><a href="/Categoria/@Html.DisplayFor(modelItem => item.Id)">@Html.DisplayFor(modelItem => item.Nome)</a></li>
+    <li><a href="~/Categoria/VerCategoria/@Html.DisplayFor(modelItem => item.Id)">@Html.DisplayFor(modelItem => item.Nome)</a></li>
 }
 
 @if (LoginUtils.Usuario != null)

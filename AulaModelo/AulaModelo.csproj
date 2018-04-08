@@ -142,6 +142,7 @@
     <Content Include="Views\Categoria\Index.cshtml" />
     <Content Include="Views\Categoria\CriarCategoria.cshtml" />
     <Content Include="Views\Shared\_MenuCategorias.cshtml" />
+    <Content Include="Views\Shared\ListProdutoCategoriaHome.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

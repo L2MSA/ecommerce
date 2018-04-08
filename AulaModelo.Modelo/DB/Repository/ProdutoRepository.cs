@@ -22,5 +22,16 @@ namespace AulaModelo.Modelo.DB.Repository
                 throw new Exception("Não achei os produtos pelo filtro nome", ex);
             }
         }
+
+        public IList<Produto> GetAllByCategoria(Guid id)
+        {
+            try
+            {
+                return this.Session.Query<Produto>().Where(w => w.Categoria.Id.Equals(id)).ToList();
+            } catch(Exception ex)
+            {
+                throw new Exception("Não achei produtos nesta categoria", ex);
+            }
+        }
     }
 }
