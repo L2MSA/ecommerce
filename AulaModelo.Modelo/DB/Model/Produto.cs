@@ -40,21 +40,21 @@ namespace AulaModelo.Modelo.DB.Model
             Property(x => x.Imagem);
             Property(x => x.Fabricante);
             Property(x => x.Preco);
+            Bag(x => x.Comentarios, m =>
+            {
+                m.Cascade(Cascade.Detach);
+                m.Lazy(CollectionLazy.Lazy);
+                m.Key(k => k.Column("IdProduto"));
+                m.Inverse(true);
+            },
+            r => r.OneToMany());
+
 
             ManyToOne(x => x.Categoria, m =>
             {
                 m.Column("IdCategoria");
                 m.Lazy(LazyRelation.NoLazy);
             });
-
-            Bag(x => x.Comentarios, m =>
-            {
-                m.Cascade(Cascade.Detach);
-                m.Lazy(CollectionLazy.Lazy);
-                m.Key(k => k.Column("IdComentario"));
-                m.Inverse(true);
-            },
-            r => r.OneToMany());
 
             Property(x => x.Estoque);
         }

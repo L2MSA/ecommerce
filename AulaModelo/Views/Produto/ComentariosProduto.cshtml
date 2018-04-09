@@ -1,0 +1,62 @@
+﻿@model AulaModelo.Modelo.DB.Model.Produto
+
+@{
+    ViewBag.Title = "Comentarios";
+}
+
+<h2>Comentarios sobre o @Model.Descricao</h2>
+
+</br>
+<table class="table">
+    <tr>
+        <th>
+            Bom
+        </th>
+        <th>
+            Ruim
+        </th>
+        <th>
+            Neutro
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <i class="glyphicon glyphicon-thumbs-up"></i>
+            @String.Format("{0:N}", ViewBag.TotalComentariosBons)%
+        </td>
+        <td>
+            <i class="glyphicon glyphicon-thumbs-down"></i>
+            @String.Format("{0:N}", ViewBag.TotalComentariosRuins)%
+        </td>
+
+        <td>
+            <i class="glyphicon glyphicon-circle-arrow-right"></i>
+            @String.Format("{0:N}", ViewBag.TotalComentariosNeutros)%
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Comentário
+        </th>
+        <th></th>
+        <th>Usuário</th>
+    </tr>
+
+    @foreach (var item in Model.Comentarios)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |*@
+                @*@Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.Nome)
+            </td>
+        </tr>
+    }
+
+</table>

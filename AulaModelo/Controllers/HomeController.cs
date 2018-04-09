@@ -1,6 +1,5 @@
 ﻿using AulaModelo.Modelo.DB;
 using AulaModelo.Modelo.DB.Model;
-using AulaModelo.Modelo.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,54 +14,57 @@ namespace AulaModelo.Controllers
         public ActionResult Index()
         {
             var users = DbFactory.Instance.UsuarioRepository.FindAll();
-            var categorias = DbFactory.Instance.CategoriaRepository.FindAll();
-
-            if (categorias.Count <= 0)
-            {
-                Categoria categoria = new Categoria()
-                {
-                    Nome = "Sem categoria"
-                };
-                DbFactory.Instance.CategoriaRepository.SaveOrUpdate(categoria);
-            }
-
             if (users.Count <= 0)
             {
                 Usuario usuario = new Usuario()
                 {
                     Nome = "Administrador",
                     AdminSN = true,
-                    Login = "usuario",
-                    Senha = "usuario",
-                    Telefone = "00000000000"
+                    Login = "admin",
+                    Senha = "admin",
                 };
                 DbFactory.Instance.UsuarioRepository.SaveOrUpdate(usuario);
             }
 
-            IList<Produto> produtos = new List<Produto>();
-            IList<Produto> sortProdutos = new List<Produto>();
+            var produtos = DbFactory.Instance.ProdutoRepository.FindAll();
 
-            if (LoginUtils.Usuario != null)
-            {
-                Usuario usuario = LoginUtils.Usuario;
-                if (usuario.AdminSN)
-                {
-                    produtos = DbFactory.Instance.ProdutoRepository.FindAll();
-                    return View(produtos);
-                }
-
-                var idInteresse = usuario.Interesse.Id;
-                produtos = DbFactory.Instance.ProdutoRepository.GetAllByCategoria(idInteresse);
-                sortProdutos = produtos.OrderBy(a => Guid.NewGuid()).ToList();
-                return View(sortProdutos);
-            }
-
-            produtos = DbFactory.Instance.ProdutoRepository.FindAll();
-            sortProdutos = produtos.OrderBy(a => Guid.NewGuid()).ToList();
-            return View(sortProdutos);
+            return View(produtos);
         }
 
-        
+        public ActionResult inserirProduto()
+        {
+            return View("EditarProduto", new Produto());
+        }
+
+        public ActionResult GravarProduto(Produto pessoa)
+        {
+            DbFactory.Instance.ProdutoRepository.SaveOrUpdate(pessoa);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult ApagarProduto(Guid id)
+        {
+            var p = DbFactory.Instance.ProdutoRepository.FindById(id);
+            if (p != null)
+            {
+                DbFactory.Instance.ProdutoRepository.Delete(p);
+            }
+
+            return RedirectToAction("Index");
+        }
+        public ActionResult DetalharProduto(Guid id)
+        {
+            var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
+            ViewBag.IdProduto = produto.Id;
+            if (produto != null)
+            {
+                return View(produto);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
         public ActionResult Buscar(String edtBusca)
         {
             Historico h = new Historico();
@@ -72,15 +74,38 @@ namespace AulaModelo.Controllers
                 h.Usuario.Id = (Guid)Session["UsuarioID"];
             }
 
+
             DbFactory.Instance.HistoricoRepository.SalvandoHistorico(h);
             DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
-            
-            if(String.IsNullOrEmpty(edtBusca))
-                return RedirectToAction("Index");
 
-            var produtos = DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
-            return View("Index", produtos);
+
+
+            DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
+
+            if (String.IsNullOrEmpty(edtBusca))
+            {
+                return RedirectToAction("Index");
+            }
+            var pessoas = DbFactory.Instance.ProdutoRepository.GetAllByName(edtBusca);
+
+            return View("Index", pessoas);
         }
+
+        public ActionResult EditarProduto(Guid id)
+        {
+            var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
+            if (produto != null)
+            {
+                return View(produto);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+
+
+        }
+
 
         public ActionResult BuscaAvancada()
         {

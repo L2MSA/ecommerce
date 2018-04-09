@@ -50,6 +50,26 @@ namespace AulaModelo.Modelo.DB.Repository
             }
         }
 
+        public T Save(T entity)
+        {
+            try
+            {
+                Session.Clear();
+
+                var transacao = Session.BeginTransaction();
+
+                Session.Save(entity);
+
+                transacao.Commit();
+
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao salvar!", ex);
+            }
+        }
+
         public IList<T> FindAll()
         {
             try

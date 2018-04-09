@@ -63,8 +63,8 @@ namespace AulaModelo.Controllers
         }
         //public ActionResult Buscar(String edtBusca)
         //{
-           
-            
+
+
         //    Historico h = new Historico();
         //    h.Pesquisa = edtBusca;
         //    if (Session["Usuario"] != null)

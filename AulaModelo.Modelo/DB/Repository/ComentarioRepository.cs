@@ -12,15 +12,29 @@ namespace AulaModelo.Modelo.DB.Repository
     {
         public ComentarioRepository(ISession session) : base(session) { }
 
-        //public IList<Comentario> GetAllByName(String nome)
-        //{
-        //    try
-        //    {
-        //        return this.Session.Query<Categoria>().Where(w => w.Nome.ToLower().Contains(nome.Trim().ToLower())).ToList();
-        //    }catch(Exception ex)
-        //    {
-        //        throw new Exception("Não achei as categorias pelo nome", ex);
-        //    }
-        //}
+            public IList<Comentario> GetAllByUser(Guid IdUsuario)
+            {
+                try
+                {
+                    return this.Session.Query<Comentario>().Where(w => w.Id == IdUsuario).ToList();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Não achei os comentarios desse Usuario", ex);
+                }
+            }
+
+        public IList<Comentario> GetAllByProduto(Guid IdProduto)
+        {
+            try
+            {
+                return this.Session.Query<Comentario>().Where(w => w.Id == IdProduto).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não achei os comentarios desse produto", ex);
+            }
+        }
+
     }
 }

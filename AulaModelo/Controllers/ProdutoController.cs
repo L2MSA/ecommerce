@@ -1,5 +1,6 @@
 ﻿using AulaModelo.Modelo.DB;
 using AulaModelo.Modelo.DB.Model;
+using AulaModelo.Modelo.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -101,15 +102,37 @@ namespace AulaModelo.Controllers
             return View("Index", pessoas);
         }
 
-        
+
 
         public ActionResult DetalharProduto(Guid id)
         {
+            ViewBag.IdProduto = id;
             var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
             if (produto != null)
                 return View(produto);
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ComentariosProduto(Guid id)
+        {
+            var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
+
+
+            double TotalComentariosBons = (double)produto.Comentarios.Where(w => w.Avaliacao == "Bom").Count() / produto.Comentarios.Count();
+            double TotalComentariosRuins = (double)produto.Comentarios.Where(w => w.Avaliacao == "Ruim").Count() / produto.Comentarios.Count();
+            double TotalComentariosNeutros = (double)produto.Comentarios.Where(w => w.Avaliacao == "Neutro").Count() / produto.Comentarios.Count();
+
+
+            ViewBag.TotalComentariosBons = TotalComentariosBons;
+            ViewBag.TotalComentariosRuins = TotalComentariosRuins;
+            ViewBag.TotalComentariosNeutros = TotalComentariosNeutros;
+
+
+            if (produto != null)
+                return View(produto);
+
+            return View("ComentariosProduto", produto.Comentarios);
         }
     }
 }

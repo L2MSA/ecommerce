@@ -41,15 +41,6 @@ namespace AulaModelo.Modelo.DB.Model
                 m.Lazy(LazyRelation.NoLazy);
             });
 
-            //Bag(x => x.Interesses, m =>
-            //{
-            //    m.Cascade(Cascade.Detach);
-            //    m.Lazy(CollectionLazy.Lazy);
-            //    m.Key(k => k.Column("IdInteresse"));
-            //    m.Inverse(true);
-            //},
-            //r => r.OneToMany());
-
             Bag(x => x.Comentarios, m =>
             {
                 m.Cascade(Cascade.Detach);
@@ -57,7 +48,7 @@ namespace AulaModelo.Modelo.DB.Model
                 m.Key(k => k.Column("IdComentario"));
                 m.Inverse(true);
             },
-            r => r.OneToMany());
+               r => r.OneToMany());
 
             Property(x => x.AdminSN);
         }
