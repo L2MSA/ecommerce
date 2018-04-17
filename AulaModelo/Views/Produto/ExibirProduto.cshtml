@@ -31,15 +31,25 @@
     </div>
 </div>
 
-
-<h3>APROVEITE E COMPRE JUNTO</h3>
 <div class="row">
-    @foreach (var item in AulaModelo.Modelo.DB.DbFactory.Instance.ProdutoRepository.FindAll())
-    {
-        <div class="col-sm-4">
+    <div class="col-sm-4">
+        @using (Html.BeginForm("adicionaraoCarrinho/"+Model.Id, "Produto", FormMethod.Post))
+        {
+        <input type="submit" value="Adicionar ao Carrinho" class="btn btn-danger" />
+         }
+    </div>
+    
+</div>
 
-            <img src="@item.Imagem" width="260px" />
-            <p>@item.Nome</p>
-            <a href="../ExibirProduto/@item.Id" class="btn btn-danger">CONFIRA</a>
-        </div>
-    }
+
+    <h3>APROVEITE E COMPRE JUNTO</h3>
+    <div class="row">
+        @foreach (var item in AulaModelo.Modelo.DB.DbFactory.Instance.ProdutoRepository.FindAll())
+        {
+            <div class="col-sm-4">
+
+                <img src="@item.Imagem" width="260px" />
+                <p>@item.Nome</p>
+                <a href="../ExibirProduto/@item.Id" class="btn btn-danger">CONFIRA</a>
+            </div>
+            }
