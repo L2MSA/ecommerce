@@ -62,7 +62,7 @@ namespace AulaModelo.Modelo.DB
                 var port = "3306";
                 var dbName = "db_comercio_eletronico";
                 var user = "root";
-                var psw = "";
+                var psw = "root";
 
                 var stringConexao = "Persist Security Info=False;"+
                     "server=" +server+

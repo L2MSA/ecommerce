@@ -134,5 +134,9 @@ namespace AulaModelo.Controllers
 
             return View("ComentariosProduto", produto.Comentarios);
         }
+        public ActionResult adicionaraoCarrinho(Guid id)
+        {
+            return RedirectToAction("ExibirProduto/"+id);
+        }
     }
 }
