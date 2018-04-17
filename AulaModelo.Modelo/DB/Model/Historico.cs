@@ -13,7 +13,15 @@ namespace AulaModelo.Modelo.DB.Model
         public virtual Guid Id { get; set; }
         public virtual String Pesquisa { get; set; }
         public virtual Usuario Usuario { get; set; }
+
+        public Historico()
+        {
+            Usuario = new Usuario();
+        }
     }
+
+
+
     public class HistoricoMap : ClassMapping<Historico>
     {
         public HistoricoMap()

@@ -124,9 +124,9 @@ namespace AulaModelo.Controllers
             double TotalComentariosNeutros = (double)produto.Comentarios.Where(w => w.Avaliacao == "Neutro").Count() / produto.Comentarios.Count();
 
 
-            ViewBag.TotalComentariosBons = TotalComentariosBons;
-            ViewBag.TotalComentariosRuins = TotalComentariosRuins;
-            ViewBag.TotalComentariosNeutros = TotalComentariosNeutros;
+            ViewBag.TotalComentariosBons = TotalComentariosBons * 100;
+            ViewBag.TotalComentariosRuins = TotalComentariosRuins * 100;
+            ViewBag.TotalComentariosNeutros = TotalComentariosNeutros * 100;
 
 
             if (produto != null)

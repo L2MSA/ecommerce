@@ -59,37 +59,37 @@
             @Html.DisplayFor(model => model.Estoque)
         </dd>
         </br>
-        @Html.BeginForm("GravarComentario", "Comentario", FormMethod.Post);
         @if (LoginUtils.Usuario != null)
         {
-
-            <dt>
-                <input type="hidden" name="Id" value="@ViewBag.IdProduto" />
-                <label for="exampleFormControlTextarea1">Avaliação</label>
-            </dt>
-            <dd>
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline1" name="rdBom" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadioInline1">Bom</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline2" name="rdRuim" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadioInline2">Ruim</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline2" name="rdNeutro" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadioInline2">Neutra</label>
-                </div>
-            </dd>
-            <dt>
-                <label for="exampleFormControlTextarea1">Comentários</label>
-            </dt>
-            <dd>
-                <textarea class="form-control" id="exampleFormControlTextarea1" name="txtComentario" rows="3"></textarea>
-            </dd>
-            <dd>
-                <input type="submit" value="Enviar" class="btn btn-primary" />
-            </dd>
+            using (Html.BeginForm("GravarComentario", "Comentario", FormMethod.Post)) {
+                <dt>
+                    <input type="hidden" name="Id" value="@ViewBag.IdProduto" />
+                    <label>Avaliação</label>
+                </dt>
+                <dd>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline1" name="rdBom" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline1">Bom</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline2" name="rdRuim" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline2">Ruim</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="customRadioInline2" name="rdNeutro" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadioInline2">Neutra</label>
+                    </div>
+                </dd>
+                <dt>
+                    <label for="exampleFormControlTextarea1">Comentários</label>
+                </dt>
+                <dd>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="txtComentario" rows="3"></textarea>
+                </dd>
+                <dd>
+                    <input type="submit" value="Enviar" class="btn btn-primary" />
+                </dd>
+            }
         }
     </dl>
 </div>
