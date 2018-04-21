@@ -22,6 +22,10 @@ namespace AulaModelo.Controllers
 
             return View();
         }
+        public ActionResult logarSite()
+        {
+            return View();
+        }
         public ActionResult EntrarUsuario()
         {
             return View();

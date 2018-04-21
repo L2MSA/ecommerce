@@ -23,5 +23,15 @@ namespace AulaModelo.Modelo.DB.Repository
                 throw new Exception("Não achei todos!", ex);
             }
         }
+        public double totalPreco(Guid id)
+        {
+            double precoTotal = 0;
+            var lista = DbFactory.Instance.CarrinhoRepository.findAllById(id);
+            for (int i = 0; i < lista.Count; i++)
+            {
+                precoTotal = precoTotal + lista[i].Produto.Preco;
+            }
+            return precoTotal;
+        }
     }
 }
