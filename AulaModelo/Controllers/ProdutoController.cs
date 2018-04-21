@@ -136,7 +136,29 @@ namespace AulaModelo.Controllers
         }
         public ActionResult adicionaraoCarrinho(Guid id)
         {
+            
+            var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
+            //Produto preenchido//
+            Usuario usuario = new Usuario();
+            usuario = (Usuario)Session["Usuario"];
+            //Usuario preenchido//
+            Carrinho carrinho = new Carrinho();
+            carrinho.Produto = produto;
+            carrinho.Usuario = usuario;
+            var addCarrinho = DbFactory.Instance.CarrinhoRepository.Save(carrinho);
             return RedirectToAction("ExibirProduto/"+id);
+        }
+        public ActionResult viewCarrinho()
+        {
+            var Id = (Guid)Session["UsuarioId"];
+            var listadeCarrinhos = DbFactory.Instance.CarrinhoRepository.findAllById(Id);
+            return View(listadeCarrinhos);
+        }
+        public ActionResult apagardoCarrinho(Guid id)
+        {
+            var carrinho = DbFactory.Instance.CarrinhoRepository.FindById(id);
+            DbFactory.Instance.CarrinhoRepository.Delete(carrinho);
+            return RedirectToAction("viewCarrinho");
         }
     }
 }

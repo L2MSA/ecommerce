@@ -28,6 +28,7 @@ namespace AulaModelo.Modelo.DB
         public ProdutoRepository ProdutoRepository { get; set; }
         public UsuarioRepository UsuarioRepository { get; set; }
         public HistoricoRepository HistoricoRepository { get; set; }
+        public CarrinhoRepository CarrinhoRepository { get; set; }
         
         private DbFactory()
         {
@@ -38,7 +39,9 @@ namespace AulaModelo.Modelo.DB
             ProdutoRepository = new ProdutoRepository(Session);
             UsuarioRepository = new UsuarioRepository(Session);
             HistoricoRepository = new HistoricoRepository(Session);
-      
+            CarrinhoRepository = new CarrinhoRepository(Session);
+
+
         }
 
         public static DbFactory Instance

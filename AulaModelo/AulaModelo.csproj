@@ -144,6 +144,7 @@
     <Content Include="Views\Shared\_MenuCategorias.cshtml" />
     <Content Include="Views\Shared\ListProdutoCategoriaHome.cshtml" />
     <Content Include="Views\Home\BuscaAvancada.cshtml" />
+    <Content Include="Views\Produto\viewCarrinho.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
