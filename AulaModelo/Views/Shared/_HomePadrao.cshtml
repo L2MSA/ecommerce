@@ -24,7 +24,7 @@
                     <div class="product-btns">
                         <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
                         <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-                        @using (Html.BeginForm("ExibirProduto/" + item.Id, "Produto", FormMethod.Post))
+                        @using (Html.BeginForm("ExibirProduto/"+@item.Id, "Produto", FormMethod.Post))
                         {
                         <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">ver produto</span></button>
                         }
@@ -35,7 +35,7 @@
                 </div>
                         
                 <div class="add-to-cart">
-                    @using (Html.BeginForm("adicionaraoCarrinho/" + item.Id, "Produto", FormMethod.Post))
+                    @using (Html.BeginForm("adicionaraoCarrinho/" + @item.Id, "Produto", FormMethod.Post))
                     {
                     <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add ao carrinho</button>
                     }

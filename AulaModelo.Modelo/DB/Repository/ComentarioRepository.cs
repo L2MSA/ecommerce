@@ -28,7 +28,7 @@ namespace AulaModelo.Modelo.DB.Repository
         {
             try
             {
-                return this.Session.Query<Comentario>().Where(w => w.Id == IdProduto).ToList();
+                return this.Session.Query<Comentario>().Where(w => w.Produto.Id == IdProduto).ToList();
             }
             catch (Exception ex)
             {

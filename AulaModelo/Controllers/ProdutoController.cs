@@ -154,6 +154,11 @@ namespace AulaModelo.Controllers
             var listadeCarrinhos = DbFactory.Instance.CarrinhoRepository.findAllById(Id);
             return View(listadeCarrinhos);
         }
+        public ActionResult gravarComentario(Comentario comentario)
+        {
+            return RedirectToAction("");
+        }
+
         public ActionResult apagardoCarrinho(Guid id)
         {
             var carrinho = DbFactory.Instance.CarrinhoRepository.FindById(id);
