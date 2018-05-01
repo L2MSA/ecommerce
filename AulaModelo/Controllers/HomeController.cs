@@ -27,6 +27,16 @@ namespace AulaModelo.Controllers
             }
 
             var produtos = DbFactory.Instance.ProdutoRepository.FindAll();
+            var cat = DbFactory.Instance.CarrinhoRepository.FindAll();
+            if(cat.Count <= 0)
+            {
+                Categoria c = new Categoria()
+                {
+                    Nome = "Esporte"
+                };
+                DbFactory.Instance.CategoriaRepository.Save(c);
+            }
+            
 
             return View(produtos);
         }
