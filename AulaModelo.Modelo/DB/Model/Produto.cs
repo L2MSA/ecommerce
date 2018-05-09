@@ -21,7 +21,7 @@ namespace AulaModelo.Modelo.DB.Model
         public virtual Double Preco { get; set; }
         public virtual Categoria Categoria { get; set; }
         public virtual IList<Comentario> Comentarios { get; set; }
-        public virtual int Estoque { get; set; }
+        public virtual Estoque Estoque { get; set; }
 
         public Produto()
         {
@@ -56,7 +56,7 @@ namespace AulaModelo.Modelo.DB.Model
                 m.Lazy(LazyRelation.NoLazy);
             });
 
-            Property(x => x.Estoque);
+            
         }
     }
 }

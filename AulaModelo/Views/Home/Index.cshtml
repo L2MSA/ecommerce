@@ -1,4 +1,5 @@
 ﻿@using AulaModelo.Modelo.Utils
+@using AulaModelo.Modelo.DB
 @model IEnumerable<AulaModelo.Modelo.DB.Model.Produto>
 @{
     ViewBag.Title = "Produtos";
@@ -16,8 +17,10 @@
             @Html.Editor("edtBusca")
             <button type="submit" valur="Buscar" class="btn btn-primary">
                 <i class="glyphicon glyphicon-search"></i> Buscar
-            </button>  @Html.ActionLink("Busca avançada", "BuscaAvancada")
+            </button> //@Html.ActionLink(".", "BuscaAvancada")
         }
+        <br/>
+        @Html.ActionLink("NOVO PRODUTO", "inserirProduto", "Produto")
         <br />
         <br />
         <table class="table table-hover table-bordered table-responsive">
@@ -37,11 +40,15 @@
                     @Html.DisplayNameFor(model => model.Preco)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.Estoque.PrecoAtual)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Categoria)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Estoque)
+                    @Html.DisplayNameFor(model => model.Estoque.Quantidade)
                 </th>
+
                 <th></th>
             </tr>
             @foreach (var item in Model)
@@ -62,11 +69,23 @@
                     @Html.DisplayFor(modelItem => item.Preco)
                 </td>
                 <td>
+                    @{ 
+                        var e = DbFactory.Instance.EstoqueRepository.buscarporIdProduto(item.Id);
+                    }
+                    @e.PrecoAtual
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Categoria.Nome)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Estoque)
+                    @{
+            var id = item.Id;
+            var p = DbFactory.Instance.EstoqueRepository.buscarporIdProduto(id);
+            //item.Estoque.Quantidade = p.Quantidade;
+                    }
+                    @Html.DisplayFor(modelItem => p.Quantidade)
                 </td>
+
                 <td>
                     @Html.ActionLink("Editar", "EditarProduto", "Produto", new { id = item.Id }, null) |
                     @Html.ActionLink("Detalhar", "DetalharProduto", "Produto", new { id = item.Id }, null) |
@@ -77,64 +96,9 @@
             }
 
         </table>
-        @Html.ActionLink("NOVO PRODUTO", "inserirProduto", "Produto")
     }
     <br />
-    <table class="table table-hover table-bordered table-striped">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Imagem)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Fabricante)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Preco)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Categoria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estoque)
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    <img class="card-img-top" width="100px" src="@Html.DisplayFor(modelItem => item.Imagem)">
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Fabricante)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Preco)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Categoria.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estoque)
-                </td>
-                <td>
-                    @Html.ActionLink("Detalhar", "DetalharProduto", "Produto", new { id = item.Id }, null) |
-                    @Html.ActionLink("Comentários", "ComentariosProduto", "Produto", new { id = item.Id }, null)
-                </td>
-            </tr>
-        }
-
-    </table>
+    
 
 
     if (!LoginUtils.Usuario.AdminSN)
@@ -144,7 +108,7 @@
             @Html.Editor("edtBusca")
             <button type="submit" valur="Buscar" class="btn btn-primary">
                 <i class="glyphicon glyphicon-search"></i> Buscar
-            </button>  @Html.ActionLink("Busca avançada", "BuscaAvancada")
+            </button> //@Html.ActionLink("Busca avançada", "BuscaAvancada")
         }
         @Html.Partial("_HomePadrao")
     }
@@ -153,7 +117,7 @@
 
 @if (LoginUtils.Usuario == null)
 {
-  
+
     @Html.Partial("_HomePadrao")
 }
 

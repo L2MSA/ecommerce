@@ -48,16 +48,52 @@ namespace AulaModelo.Controllers
         public ActionResult GravarProduto(Produto produto, Guid IdCategoria)
         {
 
-            ViewBag.IdCategoria = new SelectList(
+                ViewBag.IdCategoria = new SelectList(
                 DbFactory.Instance.CategoriaRepository.FindAll(),
                 "Id",
                 "Nome",
                 IdCategoria
             );
+            
+            if (produto.Id.ToString() == "00000000-0000-0000-0000-000000000000")
+            {
+                    var categoria = DbFactory.Instance.CategoriaRepository.FindById(IdCategoria);
+                    produto.Categoria = categoria;
+                    DbFactory.Instance.ProdutoRepository.SaveOrUpdate(produto);
+                    Estoque estoque = new Estoque()
+                    {
+                        Produto = produto,
+                        PrecoAtual = produto.Preco,
+                        Quantidade = produto.Estoque.Quantidade
 
+                    };
+                    DbFactory.Instance.EstoqueRepository.SaveOrUpdate(estoque);
+            }
+            else
+            {
             var categoria = DbFactory.Instance.CategoriaRepository.FindById(IdCategoria);
             produto.Categoria = categoria;
+
+            Estoque estoque = new Estoque()
+            {
+                Produto = produto,
+                PrecoAtual = produto.Preco,
+                Quantidade = produto.Estoque.Quantidade
+
+            };
+
+            var e = DbFactory.Instance.EstoqueRepository.buscarporIdProduto(produto.Id);
+            estoque = e;
+            estoque.Quantidade = produto.Estoque.Quantidade;
+            estoque.PrecoAtual = produto.Preco;
+            var p = DbFactory.Instance.ProdutoRepository.FindById(produto.Id);
+            produto.Preco = p.Preco;
             DbFactory.Instance.ProdutoRepository.SaveOrUpdate(produto);
+            DbFactory.Instance.EstoqueRepository.SaveOrUpdate(estoque);
+            }
+
+
+
             return RedirectToAction("Index", "Home");
         }
 

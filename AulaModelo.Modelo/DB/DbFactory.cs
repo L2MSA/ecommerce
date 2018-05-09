@@ -29,7 +29,7 @@ namespace AulaModelo.Modelo.DB
         public UsuarioRepository UsuarioRepository { get; set; }
         public HistoricoRepository HistoricoRepository { get; set; }
         public CarrinhoRepository CarrinhoRepository { get; set; }
-        
+        public EstoqueRepository EstoqueRepository { get; set; }
         private DbFactory()
         {
             Conexao();
@@ -40,7 +40,7 @@ namespace AulaModelo.Modelo.DB
             UsuarioRepository = new UsuarioRepository(Session);
             HistoricoRepository = new HistoricoRepository(Session);
             CarrinhoRepository = new CarrinhoRepository(Session);
-
+            EstoqueRepository = new EstoqueRepository(Session);
 
         }
 

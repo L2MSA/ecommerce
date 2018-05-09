@@ -72,12 +72,14 @@
     <Compile Include="DB\DbFactory.cs" />
     <Compile Include="DB\Model\Carrinho.cs" />
     <Compile Include="DB\Model\Comentario.cs" />
+    <Compile Include="DB\Model\Estoque.cs" />
     <Compile Include="DB\Model\Historico.cs" />
     <Compile Include="DB\Model\Categoria.cs" />
     <Compile Include="DB\Model\Produto.cs" />
     <Compile Include="DB\Model\Usuario.cs" />
     <Compile Include="DB\Repository\CarrinhoRepository.cs" />
     <Compile Include="DB\Repository\ComentarioRepository.cs" />
+    <Compile Include="DB\Repository\EstoqueRepository.cs" />
     <Compile Include="DB\Repository\HistoricoRepository.cs" />
     <Compile Include="DB\Repository\CategoriaRepository.cs" />
     <Compile Include="DB\Repository\ProdutoRepository.cs" />

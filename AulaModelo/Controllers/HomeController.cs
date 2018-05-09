@@ -27,7 +27,7 @@ namespace AulaModelo.Controllers
             }
 
             var produtos = DbFactory.Instance.ProdutoRepository.FindAll();
-            var cat = DbFactory.Instance.CarrinhoRepository.FindAll();
+            var cat = DbFactory.Instance.CategoriaRepository.FindAll();
             if(cat.Count <= 0)
             {
                 Categoria c = new Categoria()
