@@ -16,20 +16,23 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td><img class="card-img-top" width="100px" src="@Html.DisplayFor(modelItem => item.Produto.Imagem)"></td>
-        <td>@Html.DisplayFor(modelItem => item.Produto.Descricao)</td>
-        <td>@Html.DisplayFor(modelItem => item.Produto.Preco)</td>
-        @{ 
-            total = total + item.Produto.Preco;
-        }
-        <td>
-            @Html.ActionLink("Deletar", "apagardoCarrinho", new { id = item.Id }) 
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td><img class="card-img-top" width="100px" src="@Html.DisplayFor(modelItem => item.Produto.Imagem)"></td>
+            <td>@Html.DisplayFor(modelItem => item.Produto.Descricao)</td>
+            <td>@Html.DisplayFor(modelItem => item.Produto.Preco)</td>
+            @{
+                total = total + item.Produto.Preco;
+            }
+            <td>
+                @Html.ActionLink("Deletar", "apagardoCarrinho", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
 <b><p>Total $@total</p></b>
-<button class="btn btn-success">FINALIZAR COMPRA</button>
+
+@Html.ActionLink("FINALIZAR COMPRA", "FinalizarCompra","", htmlAttributes: new { @class = "btn btn-success" })
+@*<button type="submit" class="btn btn-success">FINALIZAR COMPRA</button>*@

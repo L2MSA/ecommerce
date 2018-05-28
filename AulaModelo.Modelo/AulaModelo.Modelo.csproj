@@ -75,6 +75,7 @@
     <Compile Include="DB\Model\Estoque.cs" />
     <Compile Include="DB\Model\Historico.cs" />
     <Compile Include="DB\Model\Categoria.cs" />
+    <Compile Include="DB\Model\PagamentoCartao.cs" />
     <Compile Include="DB\Model\Produto.cs" />
     <Compile Include="DB\Model\Usuario.cs" />
     <Compile Include="DB\Repository\CarrinhoRepository.cs" />

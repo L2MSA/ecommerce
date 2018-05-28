@@ -46,7 +46,7 @@
                     <ul class="header-links pull-right">
                         <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
                         <li>@Html.ActionLink("Cadastrar", "cadastrarUsuario", "Usuario")</li>
-                        <li><i class="fa fa-user-o"></i>@Html.ActionLink("Acount", "logarSite", "Usuario")</li>
+                        <li><i class="fa fa-user-o"></i>@Html.ActionLink("Entrar", "logarSite", "Usuario")</li>
                     </ul>
                 }
                 else
@@ -54,7 +54,7 @@
                     <ul class="header-links pull-right">
                         <li>@Html.ActionLink("Bem vindo " + LoginUtils.Usuario.Nome, "", "")</li>
                         <li>@Html.ActionLink("Histórico de Busca ", "historicoBusca", "Usuario")</li>
-                        <li>@Html.ActionLink("Deslogar ", "Deslogar", "Usuario")</li>
+                        <li>@Html.ActionLink("Sair ", "Deslogar", "Usuario")</li>
                     </ul>
                 }
 

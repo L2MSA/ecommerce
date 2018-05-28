@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AulaModelo.WSPagamento;
 
 namespace AulaModelo.Controllers
 {
@@ -237,6 +238,37 @@ namespace AulaModelo.Controllers
             var carrinho = DbFactory.Instance.CarrinhoRepository.FindById(id);
             DbFactory.Instance.CarrinhoRepository.Delete(carrinho);
             return RedirectToAction("viewCarrinho");
+        }
+
+        public ActionResult FinalizarCompra()
+        {
+
+            //int[] parcelas = new int[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            ////ViewBag.parcelas = parcelas;
+
+            //ViewBag.parcelas = new SelectList(
+            //    parcelas,
+            //    "parcelas"
+            //);
+            return View(new tDadosCartao());
+        }
+
+        public ActionResult ConfirmarCompra(tDadosCartao cartao)
+        {
+            Card ServiceCard = new Card();  //chamada do WS de pagamento de cartao
+            var mensagem = "";
+
+            try
+            {
+                ServiceCard.ValidarCartao(cartao);
+                return View("CompraConfirmada");
+            }
+            catch (Exception ex)
+            {
+                mensagem = ex.Message;
+                ViewBag.mensagem = mensagem;
+                return View("FinalizarCompra", cartao);
+            }        
         }
     }
 }
