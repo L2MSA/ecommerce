@@ -13,12 +13,14 @@ namespace AulaModelo.Modelo.DB.Model
         public virtual Guid Id { get; set; }
         public virtual Produto Produto { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual int quantidade { get; set; }
     }
     public class CarrinhoMap : ClassMapping<Carrinho>
     {
         public CarrinhoMap()
         {
             Id(x => x.Id, m => m.Generator(Generators.Guid));
+            Property(x => x.quantidade);
             ManyToOne(x => x.Produto, m =>
             {
                 m.Column("IdProduto");

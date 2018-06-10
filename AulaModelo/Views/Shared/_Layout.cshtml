@@ -14,6 +14,9 @@
     <!-- Bootstrap -->
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 
+    <!-- Layout Danfe Nota Fiscal -->
+    <link href="~/Content/DanfeStyle.css" rel="stylesheet" />
+
     <!-- Slick -->
     <link type="text/css" rel="stylesheet" href="~/Content/slick.css" />
     <link type="text/css" rel="stylesheet" href="~/Content/slick-theme.css" />
@@ -73,21 +76,23 @@
                             <a href="#" class="logo">
                                 <img src="~/imagens/logo.png" alt="">
                             </a>
-                           </div>
+                        </div>
                     </div>
 
 
                     <div class="col-md-6">
+
                         <div class="header-search">
-                            <form>
-                                <select class="input-select">
-                                    <option value="0">Categorias</option>
-                                    <option value="1">Category 01</option>
-                                    <option value="1">Category 02</option>
-                                </select>
-                                <input class="input" placeholder="Pesquisar">
-                                <button class="search-btn">Pesquisar</button>
-                            </form>
+                            <h1 style="color: lightslategray;"> Sua loja ao alcance das mãos! </h1>
+                            @*<form>
+                                    <select class="input-select">
+                                        <option value="0">Categorias</option>
+                                        <option value="1">Category 01</option>
+                                        <option value="1">Category 02</option>
+                                    </select>
+                                    <input class="input" placeholder="Pesquisar">
+                                    <button class="search-btn">Pesquisar</button>
+                                </form>*@
                         </div>
                     </div>
 
@@ -128,12 +133,12 @@
                                                             <h3 class="product-name">@lista[i].Produto.Nome</h3>
                                                             <h4 class="product-price"><span class="qty">1x</span>$@lista[i].Produto.Preco</h4>
                                                         </div>
-                                                      
+
 
                                                     </div>
                                                 }
 
-                                                 }
+                                            }
 
                                         </div>
 

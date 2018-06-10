@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "viewCarrinho";
     double total = 0;
+
 }
 
 <h2>Adicionado ao Carrinho</h2>
@@ -13,26 +14,28 @@
         <th>@Html.DisplayNameFor(model => model.Produto.Imagem)</th>
         <th>@Html.DisplayNameFor(model => model.Produto.Descricao)</th>
         <th>@Html.DisplayNameFor(model => model.Produto.Preco)</th>
+        <th>@Html.DisplayNameFor(model => model.quantidade)</th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td><img class="card-img-top" width="100px" src="@Html.DisplayFor(modelItem => item.Produto.Imagem)"></td>
-            <td>@Html.DisplayFor(modelItem => item.Produto.Descricao)</td>
-            <td>@Html.DisplayFor(modelItem => item.Produto.Preco)</td>
-            @{
-                total = total + item.Produto.Preco;
-            }
-            <td>
-                @Html.ActionLink("Deletar", "apagardoCarrinho", new { id = item.Id })
-            </td>
-        </tr>
+    <tr>
+        <td><img class="card-img-top" width="100px" src="@Html.DisplayFor(modelItem => item.Produto.Imagem)"></td>
+        <td>@Html.DisplayFor(modelItem => item.Produto.Descricao)</td>
+        <td>@Html.DisplayFor(modelItem => item.Produto.Preco)</td>
+        <td>@Html.DisplayFor(modelItem => item.quantidade)</td>
+        @{
+        total = total + item.Produto.Preco;
+        }
+        <td>
+            @Html.ActionLink("Deletar", "apagardoCarrinho", new { id = item.Id })
+        </td>
+    </tr>
     }
 
 </table>
 <b><p>Total $@total</p></b>
 
-@Html.ActionLink("FINALIZAR COMPRA", "FinalizarCompra","", htmlAttributes: new { @class = "btn btn-success" })
+@Html.ActionLink("FINALIZAR COMPRA", "FinalizarCompra", "", htmlAttributes: new { @class = "btn btn-success" })
 @*<button type="submit" class="btn btn-success">FINALIZAR COMPRA</button>*@

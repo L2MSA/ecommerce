@@ -18,6 +18,14 @@ namespace AulaModelo.Modelo.DB.Model
         public virtual Categoria Interesse { get; set; }
         public virtual IList<Comentario> Comentarios { get; set; }
         public virtual Boolean AdminSN { get; set; }
+        public virtual String Endereco { get; set; }
+        public virtual String Bairro { get; set; }
+        public virtual String CEP { get; set; }
+        public virtual String Municipio { get; set; }
+        public virtual String UF { get; set; }
+
+        public virtual String CPF_CNPJ { get; set; }
+        
 
         public Usuario()
         {
@@ -34,6 +42,12 @@ namespace AulaModelo.Modelo.DB.Model
             Property(x => x.Login);
             Property(x => x.Senha);
             Property(x => x.Telefone);
+            Property(x => x.Endereco);
+            Property(x => x.Bairro);
+            Property(x => x.CEP);
+            Property(x => x.Municipio);
+            Property(x => x.UF);
+            Property(x => x.CPF_CNPJ);
 
             ManyToOne(x => x.Interesse, m =>
             {

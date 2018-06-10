@@ -12,6 +12,9 @@ namespace AulaModelo.Controllers
 {
     public class ProdutoController : Controller
     {
+        Calculos calc;
+        tDadosCartao cartaoDados = new tDadosCartao();
+
         // GET: Produto
         public ActionResult Index()
         {
@@ -91,17 +94,17 @@ namespace AulaModelo.Controllers
                 var estoqueAtual = e.Quantidade;
                 var estoqueNovo = produto.Estoque.Quantidade;
 
-                var PrecoMinimo = CalcPrecoMinimo(precoAtual, PrecoEstoqueNovo, estoqueAtual, estoqueNovo);
+                var PrecoMinimo = calc.CalcPrecoMinimo(precoAtual, PrecoEstoqueNovo, estoqueAtual, estoqueNovo);
 
                 estoque = e;
                 estoque.Quantidade += produto.Estoque.Quantidade;
                 estoque.PrecoAtual = Math.Round(produto.Preco, 2);
                 produto.Estoque = estoque;
-                
 
-                produto.Preco = CalcPrecoImpostos(PrecoMinimo);
 
-                
+                produto.Preco = calc.CalcPrecoImpostos(PrecoMinimo);
+
+
 
                 DbFactory.Instance.ProdutoRepository.SaveOrUpdate(produto);
                 DbFactory.Instance.EstoqueRepository.SaveOrUpdate(produto.Estoque);
@@ -130,7 +133,7 @@ namespace AulaModelo.Controllers
 
             precoVenda = precoMinimo * (1 + (totalImpostos / 100));
 
-           
+
 
             return Math.Round(precoVenda, 2);
         }
@@ -210,16 +213,29 @@ namespace AulaModelo.Controllers
         }
         public ActionResult adicionaraoCarrinho(Guid id)
         {
-
+            var carrinhoProdutoOld = DbFactory.Instance.CarrinhoRepository.findByIdProduto(id);
             var produto = DbFactory.Instance.ProdutoRepository.FindById(id);
             //Produto preenchido//
             Usuario usuario = new Usuario();
             usuario = (Usuario)Session["Usuario"];
             //Usuario preenchido//
-            Carrinho carrinho = new Carrinho();
-            carrinho.Produto = produto;
-            carrinho.Usuario = usuario;
-            var addCarrinho = DbFactory.Instance.CarrinhoRepository.Save(carrinho);
+
+            if (carrinhoProdutoOld != null)
+            {
+                carrinhoProdutoOld.quantidade += 1;
+                DbFactory.Instance.CarrinhoRepository.SaveOrUpdate(carrinhoProdutoOld);
+            }
+            else
+            {
+                Carrinho carrinho = new Carrinho();
+                carrinho.Produto = produto;
+                carrinho.Usuario = usuario;
+                carrinho.quantidade = 1;
+
+                DbFactory.Instance.CarrinhoRepository.Save(carrinho);
+            }
+
+            //var addCarrinho = 
             return RedirectToAction("ExibirProduto/" + id);
         }
         public ActionResult viewCarrinho()
@@ -240,16 +256,9 @@ namespace AulaModelo.Controllers
             return RedirectToAction("viewCarrinho");
         }
 
+
         public ActionResult FinalizarCompra()
         {
-
-            //int[] parcelas = new int[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-            ////ViewBag.parcelas = parcelas;
-
-            //ViewBag.parcelas = new SelectList(
-            //    parcelas,
-            //    "parcelas"
-            //);
             return View(new tDadosCartao());
         }
 
@@ -257,7 +266,7 @@ namespace AulaModelo.Controllers
         {
             Card ServiceCard = new Card();  //chamada do WS de pagamento de cartao
             var mensagem = "";
-
+            cartaoDados = cartao;
             try
             {
                 ServiceCard.ValidarCartao(cartao);
@@ -268,7 +277,20 @@ namespace AulaModelo.Controllers
                 mensagem = ex.Message;
                 ViewBag.mensagem = mensagem;
                 return View("FinalizarCompra", cartao);
-            }        
+            }
+        }
+
+        public ActionResult GerarNFE()
+        {
+            var Id = (Guid)Session["UsuarioId"];
+            var listadeCarrinhos = DbFactory.Instance.CarrinhoRepository.findAllById(Id);
+            ViewBag.listadeCarrinhos = listadeCarrinhos;
+            return View();
+        }
+        public ActionResult GerarNFE2()
+        {
+
+            return View();
         }
     }
 }

@@ -23,6 +23,19 @@ namespace AulaModelo.Modelo.DB.Repository
                 throw new Exception("Não achei todos!", ex);
             }
         }
+
+        public Carrinho findByIdProduto(Guid id)
+        {
+            try
+            {
+                return Session.Query<Carrinho>().FirstOrDefault(x => x.Produto.Id == id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não achei o registro!", ex);
+            }
+        }
+
         public double totalPreco(Guid id)
         {
             double precoTotal = 0;

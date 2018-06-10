@@ -75,6 +75,7 @@
     <Compile Include="DB\Model\Estoque.cs" />
     <Compile Include="DB\Model\Historico.cs" />
     <Compile Include="DB\Model\Categoria.cs" />
+    <Compile Include="DB\Model\NotaFiscal.cs" />
     <Compile Include="DB\Model\PagamentoCartao.cs" />
     <Compile Include="DB\Model\Produto.cs" />
     <Compile Include="DB\Model\Usuario.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="DB\Repository\RepositoryBase.cs" />
     <Compile Include="DB\Repository\UsuarioRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Calculos.cs" />
     <Compile Include="Utils\ListaCategorias.cs" />
     <Compile Include="Utils\LoginUtils.cs" />
     <Compile Include="Utils\ShuffleList.cs" />

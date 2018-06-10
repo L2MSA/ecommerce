@@ -1,0 +1,129 @@
+﻿.danfe_pagina {
+    font-size: 10px;
+    font-family: Arial,Helvetica;
+    margin: 0px;
+    padding: 1px
+}
+
+.danfe_pagina2 {
+    margin: 1px;
+    padding: 0
+}
+
+.danfe_linha_tracejada {
+    width: 100%;
+    border-bottom: #000 1px dashed;
+    margin: 10px 0 10px 0
+}
+
+.danfe_tabelas {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0;
+    padding: 0
+}
+
+.danfe_celula_bordas {
+    border: 1px solid black;
+    vertical-align: top
+}
+
+.danfe_celula_titulo {
+    margin: 0;
+    font-size: 7pt;
+    padding: 0 2px 0px 2px
+}
+
+.danfe_celula_valor {
+    margin: 0;
+    font-size: 8pt;
+    padding-left: 4px
+}
+
+.danfe_canhoto_bordas {
+    font-size: 7pt;
+    border: 1px solid #000;
+    margin: 0px;
+    padding: 0;
+    margin: 0 1px 0 1px;
+    min-height: 30px
+}
+
+.danfe_canhoto_texto {
+    font-size: 6pt;
+    margin: 0;
+    font-weight: normal;
+    padding: 0 2px 1px 2px
+}
+
+.danfe_cabecalho_danfe {
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0;
+    text-align: center
+}
+
+.danfe_cabecalho_danfe_texto {
+    font-size: 7pt;
+    padding: 0;
+    margin: 0 1px 0 1px;
+    text-align: center
+}
+
+.danfe_cabecalho_numero {
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0;
+    text-align: center
+}
+
+.danfe_cabecalho_entrada_saida {
+    font-size: 7pt;
+}
+
+.danfe_cabecalho_entrada_saida_quadrado {
+    font-size: 13pt;
+    border: 1px solid #000000;
+    padding: 0;
+    margin: 0;
+    width: 100px;
+    text-align: center;
+    float: none;
+    min-width: 30px
+}
+
+.danfe_titulo_externo {
+    font-size: 8pt;
+    margin: 4px 0 0 0;
+    font-weight: bold
+}
+
+.danfe_item {
+    border: 1px black solid;
+    border-top: none;
+    border-bottom: dotted 1pt #dedede;
+    font-size: 8pt;
+    text-align: right;
+}
+
+.danfe_item_ultimo {
+    border: 1px black solid;
+    border-top: none;
+    margin: 0px;
+    padding: 0;
+    font-size: 1px
+}
+
+.danfe_item_cabecalho {
+    border: 1px solid #000;
+    text-align: left;
+    font-size: 7pt
+}
+
+.danfe_item_cabecalho_tabela {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #000
+}

@@ -1,0 +1,496 @@
+﻿@model IEnumerable<AulaModelo.Modelo.DB.Model.NotaFiscal>
+@{
+    var listadeCarrinhos = ViewBag.listadeCarrinhos;
+    var cont = 1;
+    var NumeroNFE = "000000001";
+
+    AulaModelo.Modelo.DB.Model.Usuario usuario = (AulaModelo.Modelo.DB.Model.Usuario)Session["Usuario"];
+
+
+}
+
+<div class="danfe_pagina">
+    <div class="danfe_pagina2">
+        <table class="danfe_tabelas">
+            <tr>
+                <td>
+                    <table class="danfe_tabelas" style="min-height:60px;">
+                        <tr>
+                            <td class="danfe_celula_bordas" colspan="2">
+                                <p class="danfe_canhoto_texto">RECEBEMOS DE ANDRADE &amp; SALVADEGO LTDA OS PRODUTOS CONSTANTES DA NOTA FISCAL INDICADA AO LADO</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="danfe_canhoto_bordas">
+                                <p class="danfe_celula_titulo">Data de recebimento</p>
+                                <p class="danfe_celula_valor">&nbsp;</p>
+                            </td>
+                            <td class="danfe_canhoto_bordas">
+                                <p class="danfe_celula_titulo">Identifica&ccedil;&atilde;o e assinatura do recebedor</p>
+                                <p class="danfe_celula_valor">&nbsp;</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>&nbsp;</td>
+                <td>
+                    <table class="danfe_tabelas" style="min-height:60px">
+                        <tr>
+                            <td class="danfe_celula_bordas" align='center'>
+                                <strong>NF-e</strong>
+                                <h2 class="danfe_cabecalho_numero">N&ordm; @NumeroNFE</h2>
+                                <strong>S&eacute;rie 1</strong>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <div class="danfe_linha_tracejada"></div>
+        <table class="danfe_tabelas">
+            <tr>
+                <td rowspan='3' class="danfe_celula_bordas">
+                    &gt; IMAGEM &lt;
+                </td>
+                <td rowspan='3' class="danfe_celula_bordas">
+                    EMITENTE
+                </td>
+                <td rowspan='3' class="danfe_celula_bordas" align='center'>
+                    <p class="danfe_cabecalho_danfe">DANFE</p>
+                    <p class="danfe_cabecalho_danfe_texto">Documento Auxiliar da <br>Nota Fiscal Eletr&ocirc;nica</p>
+                    <table class="danfe_tabelas">
+                        <tr>
+                            <td nowrap class='danfe_cabecalho_entrada_saida'>
+                                0-Entrada<br>
+                                1-Sa&iacute;da
+                            </td>
+                            <td class="danfe_cabecalho_entrada_saida_quadrado">1</td>
+                        </tr>
+                    </table>
+                    <p class="danfe_cabecalho_numero">N&ordm; @NumeroNFE</p>
+                    <p class="danfe_cabecalho_danfe_texto">SERIE: 1<br>P&aacute;gina: 1 de 1</p>
+                </td>
+                <td class="danfe_celula_bordas" align='center'>
+                    <p class="danfe_celula_titulo">Controle do Fisco</p>
+                    {CODIGO DE BARRA}
+                </td>
+            </tr>
+            <tr>
+                <td class="danfe_celula_bordas" align='center'>
+                    <p class="danfe_celula_titulo">Chave de acesso</p>
+                    <p class="danfe_celula_valor">{CHAVE DE ACESSO}</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="danfe_celula_bordas" align='center'>
+                    <p class="danfe_celula_titulo">Consulta de autenticidade no portal nacional da NF-e</p>
+                    <p class="danfe_celula_valor">
+                        <a href="http://www.nfe.fazenda.gov.br/portal" target="_blank">www.nfe.fazenda.gov.br/portal</a>
+                        ou no site da Sefaz autorizadora
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Natureza da opera&ccedil;&atilde;o</p>
+                    <p class="danfe_celula_valor">5403</p>
+                </td>
+                <td class="danfe_celula_bordas" align='center'>
+                    <p class="danfe_celula_titulo">N&uacute;mero de protocolo de autoriza&ccedil;&atilde;o de uso da NF-e</p>
+                    <p class="danfe_celula_valor">{NUMERO PROTOCOLO}</p>
+                </td>
+            </tr>
+        </table>
+        <table class="danfe_tabelas">
+            <tr>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Inscri&ccedil;&atilde;o Estadual</p>
+                    <p class="danfe_celula_valor">9060278870</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Inscr.est. do subst.trib.</p>
+                    <p class="danfe_celula_valor">&nbsp;</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">CNPJ</p>
+                    <p class="danfe_celula_valor">15.831.247/0001-27</p>
+                </td>
+            </tr>
+        </table>
+
+
+        <h3 class="danfe_titulo_externo">Destinat&aacute;rio/Remetente</h3>
+        <table class="danfe_tabelas">
+            <tr>
+                <td>
+                    <table class="danfe_tabelas">
+                        <tr>
+                            <td class="danfe_celula_bordas">
+                                <p class="danfe_celula_titulo">Nome / Raz&atilde;o Social</p>
+                                <p class="danfe_celula_valor">@usuario.Nome</p>
+                            </td>
+                            <td class="danfe_celula_bordas">
+                                <p class="danfe_celula_titulo">CNPJ/CPF</p>
+                                <p class="danfe_celula_valor">@usuario.CPF_CNPJ</p>
+                            </td>
+                            <td class="danfe_celula_bordas">
+                                <p class="danfe_celula_titulo">Inscri&ccedil;&atilde;o Estadual</p>
+                                <p class="danfe_celula_valor"></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="danfe_celula_bordas">
+                                <p class="danfe_celula_titulo">Endere&ccedil;o</p>
+                                <p class="danfe_celula_valor">@usuario.Endereco</p>
+                            </td>
+                            <td class="danfe_celula_bordas">
+                                <p class="danfe_celula_titulo">Bairro</p>
+                                <p class="danfe_celula_valor">@usuario.Bairro</p>
+                            </td>
+                            <td class="danfe_celula_bordas">
+                                <p class="danfe_celula_titulo">CEP</p>
+                                <p class="danfe_celula_valor">@usuario.CEP</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="danfe_celula_bordas">
+                                <p class="danfe_celula_titulo">Munic&iacute;pio</p>
+                                <p class="danfe_celula_valor">@usuario.Municipio</p>
+                            </td>
+                            <td class="danfe_celula_bordas">
+                                <p class="danfe_celula_titulo">Fone/Fax</p>
+                                <p class="danfe_celula_valor">@usuario.Telefone</p>
+                            </td>
+                            <td class="danfe_celula_bordas">
+                                <p class="danfe_celula_titulo">UF</p>
+                                <p class="danfe_celula_valor">@usuario.UF</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="10%">
+                    <table class="danfe_tabelas">
+                        <tr>
+                            <td class="danfe_celula_bordas">
+                                <p class="danfe_celula_titulo">Data emiss&atilde;o</p>
+                                <p class="danfe_celula_valor">22/05/2013</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="danfe_celula_bordas">
+                                <p class="danfe_celula_titulo">Data sa&iacute;da</p>
+                                <p class="danfe_celula_valor">22/05/2013</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="danfe_celula_bordas">
+                                <p class="danfe_celula_titulo">Hora sa&iacute;da</p>
+                                <p class="danfe_celula_valor">23:32</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <h3 class="danfe_titulo_externo">Faturas</h3>
+        <table class="danfe_tabelas">
+            <tr class='danfe_item_cabecalho_tabela' align='left'>
+                <th class="danfe_item_cabecalho">N&uacute;mero</th>
+                <th class="danfe_item_cabecalho">Vencimento</th>
+                <th class="danfe_item_cabecalho" style="text-align:right;">Valor</th>
+                <th class="danfe_item_cabecalho">N&uacute;mero</th>
+                <th class="danfe_item_cabecalho">Vencimento</th>
+                <th class="danfe_item_cabecalho" style="text-align:right;">Valor</th>
+                <th class="danfe_item_cabecalho">N&uacute;mero</th>
+                <th class="danfe_item_cabecalho">Vencimento</th>
+                <th class="danfe_item_cabecalho" style="text-align:right;">Valor</th>
+            </tr>
+            <tr class='danfe_item'>
+                <td align='left'>{fatura}</td>
+                <td align='left'>{data}</td>
+                <td style='border-right:solid black 1px'>{valor}</td>
+                <td align='left'>{fatura}</td>
+                <td align='left'>{data}</td>
+                <td style='border-right:solid black 1px'>{valor}</td>
+                <td align='left'>{fatura}</td>
+                <td align='left'>{data}</td>
+                <td style='border-right:solid black 1px'>{valor}</td>
+            </tr>
+            <tr>
+                <td class="danfe_item_ultimo" colspan='9'>&nbsp;</td>
+            </tr>
+        </table>
+        <h3 class="danfe_titulo_externo">C&aacute;lculo do imposto</h3>
+        <table class="danfe_tabelas">
+            <tr>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Base de c&aacute;lculo do ICMS</p>
+                    <p class="danfe_celula_valor">
+                        @{
+                            double BaseICMS = 0;
+                            foreach (AulaModelo.Modelo.DB.Model.Carrinho car in listadeCarrinhos)
+                            {
+                                BaseICMS += car.Produto.Preco * car.quantidade;
+                            }
+                        }
+                        @BaseICMS
+                    </p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Valor do ICMS</p>
+                    <p class="danfe_celula_valor">
+                        @{
+                            double ValorICMS = 0;
+                            double percentualICMS = 12;
+                            foreach (AulaModelo.Modelo.DB.Model.Carrinho car in listadeCarrinhos)
+                            {
+                                ValorICMS += (car.Produto.Preco * car.quantidade) * (percentualICMS / 100);
+                            }
+                        }
+                        @ValorICMS
+                    </p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Base de c&aacute;lculo do ICMS Subst.</p>
+                    <p class="danfe_celula_valor"></p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Valor do ICMS Subst.</p>
+                    <p class="danfe_celula_valor">0,00</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Valor total dos produtos</p>
+                    <p class="danfe_celula_valor">
+                        @{
+                            double Total = 0.00;
+                            foreach (AulaModelo.Modelo.DB.Model.Carrinho car in listadeCarrinhos)
+                            {
+                                Total += car.Produto.Preco * car.quantidade;
+                            }
+                        }
+                        @Total
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <table class="danfe_tabelas">
+            <tr>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Valor do frete</p>
+                    <p class="danfe_celula_valor">11,21</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Valor do seguro</p>
+                    <p class="danfe_celula_valor">0,00</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Desconto</p>
+                    <p class="danfe_celula_valor">0,00</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Outras despesas acess&oacute;rias</p>
+                    <p class="danfe_celula_valor">0,00</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Valor do IPI</p>
+                    <p class="danfe_celula_valor">
+                        @{
+                            double ValorIPI = 0;
+                            double percentualIPI = 7;
+                            foreach (AulaModelo.Modelo.DB.Model.Carrinho car in listadeCarrinhos)
+                            {
+                                ValorIPI += (car.Produto.Preco * car.quantidade) * (percentualIPI / 100);
+                            }
+                        }
+                        @ValorIPI
+                    </p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Valor total da nota</p>
+                    <p class="danfe_celula_valor">@Total</p>
+                </td>
+            </tr>
+        </table>
+        <h3 class="danfe_titulo_externo">Transportador/Volumes transportados</h3>
+        <table class="danfe_tabelas">
+            <tr>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Nome</p>
+                    <p class="danfe_celula_valor">Empresa Brasileira de Correios e Tel&eacute;grafos</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Frete por conta</p>
+                    <p class="danfe_celula_valor">0-Emitente</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">C&oacute;digo ANTT</p>
+                    <p class="danfe_celula_valor">&nbsp;</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Placa do ve&iacute;culo</p>
+                    <p class="danfe_celula_valor">&nbsp;</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">UF</p>
+                    <p class="danfe_celula_valor">&nbsp;</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">CNPJ/CPF</p>
+                    <p class="danfe_celula_valor">34.028.316/0020-76</p>
+                </td>
+            </tr>
+        </table>
+        <table class="danfe_tabelas">
+            <tr>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Endere&ccedil;o</p>
+                    <p class="danfe_celula_valor">Rua Jo&atilde;o Negr&atilde;o, n&ordm; 1251</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Munic&iacute;pio</p>
+                    <p class="danfe_celula_valor">Curitiba</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">UF</p>
+                    <p class="danfe_celula_valor">PR</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Inscri&ccedil;&atilde;o Estadual</p>
+                    <p class="danfe_celula_valor">ISENTO</p>
+                </td>
+            </tr>
+        </table>
+        <table class="danfe_tabelas">
+            <tr>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Quantidade</p>
+                    <p class="danfe_celula_valor">1</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Esp&eacute;cie</p>
+                    <p class="danfe_celula_valor">&nbsp;</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Marca</p>
+                    <p class="danfe_celula_valor">&nbsp;</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Numera&ccedil;&atilde;o</p>
+                    <p class="danfe_celula_valor">&nbsp;</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Peso bruto</p>
+                    <p class="danfe_celula_valor">0,00</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Peso l&iacute;quido</p>
+                    <p class="danfe_celula_valor">0,00</p>
+                </td>
+
+            </tr>
+        </table>
+        <h3 class="danfe_titulo_externo">Itens da nota fiscal</h3>
+        <table class="danfe_item_cabecalho_tabela">
+            <tr>
+                <th class="danfe_item_cabecalho">C&oacute;digo</th>
+                <th class="danfe_item_cabecalho">Descri&ccedil;&atilde;o do produto/servi&ccedil;o</th>
+                <th class="danfe_item_cabecalho">NCM/SH</th>
+                <th class="danfe_item_cabecalho">CST</th>
+                <th class="danfe_item_cabecalho">CFOP</th>
+                <th class="danfe_item_cabecalho">UN</th>
+                <th class="danfe_item_cabecalho">Qtde</th>
+                <th class="danfe_item_cabecalho">Pre&ccedil;o un</th>
+                <th class="danfe_item_cabecalho">Pre&ccedil;o total</th>
+                <th class="danfe_item_cabecalho">BC ICMS</th>
+                <th class="danfe_item_cabecalho">Vlr.ICMS</th>
+                <th class="danfe_item_cabecalho">Vlr.IPI</th>
+                <th class="danfe_item_cabecalho">%ICMS</th>
+                <th class="danfe_item_cabecalho">%IPI</th>
+            </tr>
+            @foreach (var item in listadeCarrinhos)
+            {
+                <tr class="danfe_item">
+                    <td align='left'>@cont</td>
+                    <td align='left'>@item.Produto.Nome</td>
+                    <td>22000022</td>
+                    <td>000</td>
+                    <td>5403</td>
+                    <td>UN</td>
+                    <td>@item.quantidade</td>
+                    <td>@item.Produto.Preco</td>
+                    <td>@{var precoTotal = item.Produto.Preco * item.quantidade;} @Math.Round(precoTotal, 2)</td>
+                    <td>
+                        @{
+                            double vbICMS = 0;
+                            foreach (AulaModelo.Modelo.DB.Model.Carrinho car in listadeCarrinhos)
+                            {
+                                vbICMS += car.Produto.Preco * car.quantidade;
+                            }
+                        }
+                        @Math.Round(BaseICMS,2)
+                    </td>
+                    <td>
+                        @{
+                            double vICMS = 0;
+                            foreach (AulaModelo.Modelo.DB.Model.Carrinho car in listadeCarrinhos)
+                            {
+                                vICMS = (car.Produto.Preco * car.quantidade) * (percentualICMS / 100);
+                            }
+                        }
+                        @Math.Round(vICMS,2)
+                    </td>
+                    <td>
+                        @{
+                            double vIPI = 0;
+                            foreach (AulaModelo.Modelo.DB.Model.Carrinho car in listadeCarrinhos)
+                            {
+                                vIPI = (car.Produto.Preco * car.quantidade) * (percentualIPI / 100);
+                            }
+                        }
+                        @Math.Round(vIPI, 2)
+                    </td>
+                    <td>@percentualICMS</td>
+                    <td>@percentualIPI</td>
+                </tr>
+                cont += 1;
+            }
+            <tr>
+                <td class="danfe_item_ultimo" colspan='14'>&nbsp;</td>
+            </tr>
+        </table>
+        <h3 class="danfe_titulo_externo">C&aacute;lculo do ISSQN</h3>
+        <table class="danfe_tabelas">
+            <tr>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Inscri&ccedil;&atilde;o Municipal</p>
+                    <p class="danfe_celula_valor">1953559</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Valor total dos servi&ccedil;os</p>
+                    <p class="danfe_celula_valor">0,00</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Base de c&aacute;lculo do ISSQN</p>
+                    <p class="danfe_celula_valor">0,00</p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Valor do ISSQN</p>
+                    <p class="danfe_celula_valor">0,00</p>
+                </td>
+            </tr>
+        </table>
+
+        <div class="danfe_titulo_externo">Dados adicionais</div>
+        <table class="danfe_tabelas">
+            <tr style="min-height:200px">
+                <td class="danfe_celula_bordas" width="70%">
+                    <p class="danfe_celula_titulo">Observa&ccedil;&otilde;es</p>
+                    <p class="danfe_celula_valor"></p>
+                </td>
+                <td class="danfe_celula_bordas">
+                    <p class="danfe_celula_titulo">Reservado ao fisco</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
