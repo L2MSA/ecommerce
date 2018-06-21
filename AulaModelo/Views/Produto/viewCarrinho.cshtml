@@ -20,22 +20,36 @@
 
     @foreach (var item in Model)
     {
-    <tr>
-        <td><img class="card-img-top" width="100px" src="@Html.DisplayFor(modelItem => item.Produto.Imagem)"></td>
-        <td>@Html.DisplayFor(modelItem => item.Produto.Descricao)</td>
-        <td>@Html.DisplayFor(modelItem => item.Produto.Preco)</td>
-        <td>@Html.DisplayFor(modelItem => item.quantidade)</td>
-        @{
-        total = total + item.Produto.Preco;
-        }
-        <td>
-            @Html.ActionLink("Deletar", "apagardoCarrinho", new { id = item.Id })
-        </td>
-    </tr>
+        <tr>
+            <td><img class="card-img-top" width="100px" src="@Html.DisplayFor(modelItem => item.Produto.Imagem)"></td>
+            <td>@Html.DisplayFor(modelItem => item.Produto.Descricao)</td>
+            <td>@Html.DisplayFor(modelItem => item.Produto.Preco)</td>
+            <td>@Html.DisplayFor(modelItem => item.quantidade)</td>
+            @{
+                total = total + item.Produto.Preco;
+            }
+            <td>
+                @Html.ActionLink("Deletar", "apagardoCarrinho", new { id = item.Id })
+            </td>
+        </tr>
     }
 
 </table>
 <b><p>Total $@total</p></b>
+@{
+    ViewBag.Preco = total;
+}
 
 @Html.ActionLink("FINALIZAR COMPRA", "FinalizarCompra", "", htmlAttributes: new { @class = "btn btn-success" })
+
+
+@using (Html.BeginForm("FinalizarCompra", "Produto", FormMethod.Post))
+{
+    <div class="form-group">
+        <input type="hidden" id="Valor" name="Valor" value="@total" />
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="FINALIZAR COMPRA" class="btn btn-success" />
+        </div>
+    </div>
+}
 @*<button type="submit" class="btn btn-success">FINALIZAR COMPRA</button>*@

@@ -244,9 +244,18 @@ namespace AulaModelo.Controllers
             var listadeCarrinhos = DbFactory.Instance.CarrinhoRepository.findAllById(Id);
             return View(listadeCarrinhos);
         }
-        public ActionResult gravarComentario(Comentario comentario)
+        public ActionResult gravarComentario(Guid Id,Comentario comentario)
         {
-            return RedirectToAction("");
+            var produto = DbFactory.Instance.ProdutoRepository.FindById(Id);
+            comentario.Produto = produto;
+            var IdUsuario = (Guid)Session["UsuarioId"];
+            var usuarioLogado = DbFactory.Instance.UsuarioRepository.FindById(IdUsuario);
+            comentario.Usuario = usuarioLogado;
+            DbFactory.Instance.ComentarioRepository.Save(comentario);
+
+            return RedirectToAction("ExibirProduto/"+Id);
+
+
         }
 
         public ActionResult apagardoCarrinho(Guid id)
@@ -257,9 +266,13 @@ namespace AulaModelo.Controllers
         }
 
 
-        public ActionResult FinalizarCompra()
+        public ActionResult FinalizarCompra(double Valor)
         {
-            return View(new tDadosCartao());
+            //return View(new tDadosCartao());
+            tDadosCartao d = new tDadosCartao();
+            d.Valor = Valor;
+            
+            return View(d);
         }
 
         public ActionResult ConfirmarCompra(tDadosCartao cartao)

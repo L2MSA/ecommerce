@@ -6,6 +6,13 @@
 
 @{
     ViewBag.Title = "" + Model.Nome;
+    var coment = DbFactory.Instance.ComentarioRepository.GetAllByProduto(Model.Id);
+    int quantidadeTOTAL = 0;
+    int quantidadeTotalAvalicao = 0;
+    foreach (var item in coment)
+    {
+        quantidadeTOTAL = quantidadeTOTAL + Convert.ToInt32(@item.Avaliacao);
+    }
 }
 <!-- SECTION -->
 <div class="section">
@@ -38,11 +45,17 @@
                     <h2 class="product-name">@Model.Nome</h2>
                     <div>
                         <div class="product-rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
+                            @{
+
+                                if (coment.Count > 0)
+                                {
+                                    for (int i = 0; i < Convert.ToInt32((quantidadeTOTAL / coment.Count)); i++)
+                                    {
+                                        <i class="fa fa-star"></i>
+                                    }
+                                }
+                            }
+
                         </div>
                         <a class="review-link" href="#">
                             @{
@@ -53,167 +66,176 @@
                         </a>
                     </div>
                     <div>
-                        <h3 class="product-price">@{
-                            var estoque = DbFactory.Instance.EstoqueRepository.buscarporIdProduto(Model.Id);
-                            }
-                        $@estoque.PrecoAtual <del class="product-old-price">$@Model.Preco</del></h3>
-                        <span class="product-available">Promoção</span>
-                    </div>
-                    <p>@Model.Descricao</p>
-
-                    <div class="product-options">
-                        <label>
-                            Size
-                            <select class="input-select">
-                                <option value="0">X</option>
-                            </select>
-                        </label>
-                        <label>
-                            Color
-                            <select class="input-select">
-                                <option value="0">Red</option>
-                            </select>
-                        </label>
-                    </div>
-
-                    <div class="add-to-cart">
-                        <div class="qty-label">
-                            Quantidade
-                            <div class="input-number">
-                                <input type="number">
-                                <span class="qty-up">+</span>
-                                <span class="qty-down">-</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="add-to-cart">
-                        @{ 
-                            estoque = DbFactory.Instance.EstoqueRepository.buscarporIdProduto(Model.Id);
-                        }  
-                        Disponível no Estoque <b>@estoque.Quantidade</b>
-                    </div>
-
-
-
-
-                    <ul class="product-btns">
-                        <li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-                        <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
-                    </ul>
-
-                    <ul class="product-links">
-                        <li>Categoria: @Model.Categoria.Nome</li>
-                    </ul>
-
+                        <h3 class="product-price">
+                            @{
+                                var estoque = DbFactory.Instance.EstoqueRepository.buscarporIdProduto(Model.Id);
+                        }
+                        $@estoque.PrecoAtual <del class="product-old-price">$@Model.Preco</del>
+                    </h3>
+                    <span class="product-available">Promoção</span>
                 </div>
-            </div>
-            <!-- /Product details -->
-            <!-- Product tab -->
-            <div class="col-md-12">
-                <div id="product-tab">
-                    <!-- product tab nav -->
-                    <ul class="tab-nav">
-                        <li class="active"><a data-toggle="tab" href="#tab1">Descrição</a></li>
-                        <li><a data-toggle="tab" href="#tab2">Detalhes</a></li>
-                        <li><a data-toggle="tab" href="#tab3">Comentário (@comentarios.Count)</a></li>
-                    </ul>
-                    <!-- /product tab nav -->
-                    <!-- product tab content -->
-                    <div class="tab-content">
-                        <!-- tab1  -->
-                        <div id="tab1" class="tab-pane fade in active">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p>@Model.Descricao</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /tab1  -->
-                        <!-- tab2  -->
-                        <div id="tab2" class="tab-pane fade in">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p>Muito bom</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /tab2  -->
-                        <!-- tab3  -->
-                        <div id="tab3" class="tab-pane fade in">
-                            <div class="row">
-                                <!-- Rating -->
-                  
+                <p>@Model.Descricao</p>
 
-                                <div class="col-md-6">
-                                    <div id="reviews">
-                                        <ul class="reviews">
-                                            @{
-
-                                                foreach (var item in comentarios)
-                                                {
-                                                    <li>
-                                                        <div class="review-heading">
-                                                            <h5 class="name">@item.Usuario.Nome</h5>
-                                                            <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                            <div class="review-rating">
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star-o empty"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="review-body">
-                                                            <p>@item.Descricao dsddsddsds</p>
-                                                        </div>
-                                                    </li>
-                                                }
-                                            }
-
-                                        </ul>
-                                       
-                                    </div>
-                                </div>
-
-                                @using (Html.BeginForm("gravarComentario", "Produto", FormMethod.Post))
-                                {
-                                    
-                                    <div class="col-md-3">
-                                        <div id="review-form">
-                                            <form class="review-form">
-                                                <textarea id="Descricao" class="input" placeholder="Seu Comentário"></textarea>
-                                                <div class="input-rating">
-                                                    <span>Classificação: </span>
-                                                    <div class="stars">
-                                                        <input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
-                                                        <input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
-                                                        <input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
-                                                        <input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
-                                                        <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
-                                                    </div>
-                                                </div>
-                                                <button class="primary-btn">Gravar</button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                }
-
-
-
-
-                                <!-- /Review Form -->
-                            </div>
-                        </div>
-                        <!-- /tab3  -->
-                    </div>
-                    <!-- /product tab content  -->
+                <div class="product-options">
+                    <label>
+                        Size
+                        <select class="input-select">
+                            <option value="0">X</option>
+                        </select>
+                    </label>
+                    <label>
+                        Color
+                        <select class="input-select">
+                            <option value="0">Red</option>
+                        </select>
+                    </label>
                 </div>
+
+                <div class="add-to-cart">
+                    <div class="qty-label">
+                        Quantidade
+                        <div class="input-number">
+                            <input type="number">
+                            <span class="qty-up">+</span>
+                            <span class="qty-down">-</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="add-to-cart">
+                    @{
+                        estoque = DbFactory.Instance.EstoqueRepository.buscarporIdProduto(Model.Id);
+                    }
+                    Disponível no Estoque <b>@estoque.Quantidade</b>
+                </div>
+
+
+
+
+                <ul class="product-btns">
+                    <li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
+                    <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
+                </ul>
+
+                <ul class="product-links">
+                    <li>Categoria: @Model.Categoria.Nome</li>
+                </ul>
+
             </div>
-            <!-- /product tab -->
         </div>
-        <!-- /row -->
+        <!-- /Product details -->
+        <!-- Product tab -->
+        <div class="col-md-12">
+            <div id="product-tab">
+                <!-- product tab nav -->
+                <ul class="tab-nav">
+                    <li class="active"><a data-toggle="tab" href="#tab1">Descrição</a></li>
+                    <li><a data-toggle="tab" href="#tab2">Detalhes</a></li>
+                    <li><a data-toggle="tab" href="#tab3">Comentário (@comentarios.Count)</a></li>
+                </ul>
+                <!-- /product tab nav -->
+                <!-- product tab content -->
+                <div class="tab-content">
+                    <!-- tab1  -->
+                    <div id="tab1" class="tab-pane fade in active">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>@Model.Descricao</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /tab1  -->
+                    <!-- tab2  -->
+                    <div id="tab2" class="tab-pane fade in">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>Muito bom</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /tab2  -->
+                    <!-- tab3  -->
+                    <div id="tab3" class="tab-pane fade in">
+                        <div class="row">
+                            <!-- Rating -->
+
+
+                            <div class="col-md-6">
+                                <div id="reviews">
+                                    <ul class="reviews">
+                                        @{
+
+                                            foreach (var item in comentarios)
+                                            {
+                                                <li>
+                                                    <div class="review-heading">
+                                                        <h5 class="name">@item.Usuario.Nome</h5>
+                                                        @{
+                                                            var quantidadeComentario = Convert.ToInt32(@item.Avaliacao);
+                                                        }
+                                                        <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                        <div class="review-rating">
+                                                            @for (int i = 0; i < quantidadeComentario; i++)
+                                                            {
+
+                                                                <i class="fa fa-star"></i>
+
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    <div class="review-body">
+                                                        <p>@item.Descricao</p>
+                                                    </div>
+                                                </li>
+
+                                                
+                                                quantidadeTotalAvalicao = quantidadeTotalAvalicao + quantidadeComentario;
+                                            }
+                                        }
+
+                                    </ul>
+
+                                </div>
+                            </div>
+
+                            @using (Html.BeginForm("gravarComentario/" + Model.Id, "Produto", FormMethod.Post))
+                            {
+
+                                <div class="col-md-3">
+                                    <div id="review-form">
+                                        <form class="review-form">
+                                            <textarea id="Descricao" name="Descricao" role="Descricao" title="Descricao" class="input" placeholder="Seu Comentário"></textarea>
+                                            <div class="input-rating">
+                                                <span>Classificação: </span>
+                                                <div class="stars">
+                                                    <input id="Avaliacao" name="Avaliacao" value="1" type="radio"><label for="star5"></label>
+                                                    <input id="Avaliacao" name="Avaliacao" value="2" type="radio"><label for="star4"></label>
+                                                    <input id="Avaliacao" name="Avaliacao" value="3" type="radio"><label for="star3"></label>
+                                                    <input id="Avaliacao" name="Avaliacao" value="4" type="radio"><label for="star2"></label>
+                                                    <input id="Avaliacao" name="Avaliacao" value="5" type="radio"><label for="star1"></label>
+                                                </div>
+                                            </div>
+                                            <button class="primary-btn">Gravar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            }
+
+
+
+
+                            <!-- /Review Form -->
+                        </div>
+                    </div>
+                    <!-- /tab3  -->
+                </div>
+                <!-- /product tab content  -->
+            </div>
+        </div>
+        <!-- /product tab -->
     </div>
-    <!-- /container -->
+    <!-- /row -->
+</div>
+<!-- /container -->
 </div>
 <!-- /SECTION -->
 
